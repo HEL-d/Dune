@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/ava.xml" value="0.2115" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/gradientbackground.xml" value="0.2" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.2115" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/ic_baseline_arrow_back_27.xml" value="0.2115" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.2155" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/ic_baseline_arrow_right_alt_24.xml" value="0.2115" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/ic_baseline_arrow_right_alt_25.xml" value="0.2115" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.2075" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/ic_jole.xml" value="0.2115" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/ic_kmp.xml" value="0.2115" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/ic_kop.xml" value="0.2115" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2115" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/ic_mako.xml" value="0.2115" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/ic_npm.xml" value="0.15" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/drawable/ic_virtual_reality_experience_3025703_2526901.xml" value="0.2115" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/font/berkshire_swash.xml" value="0.234375" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/font/lato.xml" value="0.234375" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/layout/activity_basicinfo.xml" value="0.22" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/layout/activity_entrance.xml" value="0.25" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/layout/activity_helpactivity.xml" value="0.6421356421356421" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/layout/activity_otpactivity.xml" value="0.25" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/layout/activity_profile.xml" value="0.5" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/layout/activity_scene.xml" value="0.2" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/layout/activity_setting.xml" value="0.33" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/layout/activity_splashscreen.xml" value="0.22" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/layout/keyboard.xml" value="0.25" />
+        <entry key="..\:/Users/sonu computer/AndroidStudioProjects/Astergen2/app/src/main/res/layout/messageview.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

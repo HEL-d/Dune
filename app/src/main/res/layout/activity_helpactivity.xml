@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Helpactivity">
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"
+
+        android:layout_height="30dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Help"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/lato"
+        android:textStyle="bold"
+        android:layout_marginStart="60dp"
+        android:layout_height="wrap_content"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="17dp"
+        android:id="@+id/sssg"
+        android:layout_height="wrap_content">
+
+
+        <com.caverock.androidsvg.SVGImageView
+            android:layout_width="33dp"
+            android:id="@+id/oop1"
+            app:svg="pencil.svg"
+            android:layout_marginTop="5dp"
+            android:layout_height="33dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Describe your problem"
+            android:layout_marginStart="23dp"
+            android:textSize="17sp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/lato"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_below="@+id/sssg"
+        android:id="@+id/nnn"
+        android:layout_height="wrap_content">
+
+
+        <com.caverock.androidsvg.SVGImageView
+            android:layout_width="43dp"
+            android:id="@+id/oop2"
+             app:svg="call.svg"
+            android:layout_height="43dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/lato"
+            android:layout_marginStart="15dp"
+            android:text="Call to help center"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>
