@@ -1,12 +1,16 @@
 package com.evw.aster
 
 import android.app.Application
-import io.realm.Realm
+import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
+
 
 class ApplicationsubClass:Application() {
     override fun onCreate() {
         super.onCreate()
-        Realm.init(this)
+       FirebaseApp.initializeApp(this)
+
     }
 
 }

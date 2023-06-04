@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,171 +7,126 @@
     tools:context=".BasicinfoActivity">
 
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="50dp"
-        app:cardElevation="24dp"
-        android:layout_marginStart="25dp"
+    <com.caverock.androidsvg.SVGImageView
+        android:id="@+id/SVGImageView"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        app:svg="ffi.svg" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        style="@style/Widget.App.CardView"
-        android:id="@+id/meme"
-        app:cardCornerRadius="10dp"
-        android:layout_height="40dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:background="?attr/backbutton"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.card.MaterialCardView>
+        android:fontFamily="@font/lato"
+        android:text="Name &amp; Birthday"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SVGImageView"
+        app:layout_constraintVertical_bias="0" />
 
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="300dp"
-        android:layout_height="450dp"
-        android:layout_below="@id/meme"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
+
+    <EditText
+        android:id="@+id/name_now"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="40dp"
-        style="@style/Widget.App.CardView"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="24dp">
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:backgroundTint="?attr/backgroundstyle"
-            android:foregroundTint="?attr/foregroundstyle"
-            android:layout_height="match_parent">
-
-
-            <TextView
-                android:id="@+id/wwe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:background="@color/Transparent"
-                android:fontFamily="@font/lato"
-                android:text="Fill your basics"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_below="@id/wwe"
-                android:layout_marginEnd="25dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="30dp"
-                android:id="@+id/lax"
-                app:boxBackgroundMode="filled"
-                app:boxBackgroundColor="?attr/nedit"
-                android:hint="Name"
-                android:layout_height="wrap_content">
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/lato"
-                    android:inputType="textMultiLine"
-                    android:textStyle="bold"
-                    android:maxLines="3"
-                    android:paddingStart="80dp"
-                    android:layout_height="match_parent"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.caverock.androidsvg.SVGImageView
-                android:layout_width="55dp"
-                android:layout_height="60dp"
-                android:layout_below="@id/wwe"
-                android:background="@color/Transparent"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="35dp"
-                app:svg="users.svg"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_below="@id/lax"
-                android:id="@+id/gen"
-                android:layout_marginEnd="25dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                app:boxBackgroundMode="filled"
-                app:boxBackgroundColor="?attr/nedit"
-                android:hint="Gender"
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/lato"
-                    android:textStyle="bold"
-                    android:inputType="text"
-                    android:paddingStart="80dp"
-                    android:layout_height="wrap_content"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.caverock.androidsvg.SVGImageView
-                android:layout_width="52dp"
-                android:layout_height="45dp"
-                android:layout_below="@id/lax"
-                android:background="@color/Transparent"
-                android:layout_marginStart="27dp"
-                android:layout_marginTop="35dp"
-                app:svg="gender.svg"/>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_below="@id/gen"
-                android:layout_marginEnd="25dp"
-                android:id="@+id/tio"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                app:boxBackgroundMode="filled"
-                app:boxBackgroundColor="?attr/nedit"
-                android:hint="Birthdate"
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/lato"
-                    android:textStyle="bold"
-                    android:inputType="date"
-                    android:paddingStart="80dp"
-                    android:layout_height="wrap_content"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.caverock.androidsvg.SVGImageView
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:layout_below="@id/gen"
-                android:background="@color/Transparent"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="36dp"
-                app:svg="calender.svg"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="match_parent"
-                android:layout_below="@id/tio"
-                android:layout_marginTop="35dp"
-                android:backgroundTint="#1DA1F2"
-                android:textColor="@color/white"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:text="Next"
-                android:layout_height="55dp"/>
+        android:layout_marginEnd="15dp"
+        android:hint="Fullname"
+        android:textColor="@color/white"
+        android:maxLines="2"
+        android:inputType="text"
+        android:textColorHint="#808080"
+        android:textSize="17sp"
+        android:background="@drawable/ic_jole"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0">
 
 
 
+    </EditText>
+
+
+    <EditText
+        android:id="@+id/birthday_now"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:background="@drawable/ic_jole"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/white"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textColorHint="#808080"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textSize="17sp"
+        android:hint="Birthday"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_now">
 
 
 
+    </EditText>
 
 
-        </RelativeLayout>
-    </com.google.android.material.card.MaterialCardView>
+    <com.smb.glowbutton.GlowButton
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintVertical_bias="0"
+        app:gb_backgroundColor="@color/Aster_neo"
+        app:gb_textColor="@color/Aster_neo"
+        app:gb_cornerRadius="8dp"
+        app:gb_disabledTextColor="#808080"
+        app:gb_glowAnimationDuration="500"
+        app:gb_glowColor="@color/Aster_neo"
+        app:gb_rippleAnimationDuration="1500"
+        app:gb_rippleColor="@color/purple_500"
+        app:gb_rippleEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birthday_now" />
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Transparent"
+        android:text="Next"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/button_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_save"
+        tools:ignore="TextContrastCheck" />
 
 
 
@@ -181,7 +136,10 @@
 
 
 
-</RelativeLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

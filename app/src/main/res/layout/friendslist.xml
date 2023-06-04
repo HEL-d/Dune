@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingBottom="15dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:layout_constraintVertical_bias="0"
+        android:id="@+id/frrel"
+        android:background="@drawable/rippleefffect"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/namecloud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/Transparent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/namecloud"
+            android:layout_marginStart="15dp"
+            android:id="@+id/name_v"
+            android:textColor="#808080"
+            android:background="@color/Transparent"
+            android:layout_marginTop="2dp"
+            android:textSize="15sp"/>
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_alignParentEnd="true"
+            android:text="Remove"
+            android:id="@+id/remove"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@drawable/rippleefffect"
+            app:chipBackgroundColor="@color/black"
+            app:chipStrokeColor="@color/white"
+            app:chipStrokeWidth="1dp" />
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

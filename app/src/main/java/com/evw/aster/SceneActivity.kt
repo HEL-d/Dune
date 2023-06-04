@@ -1,81 +1,77 @@
 package com.evw.aster
 import android.os.Bundle
-import android.text.InputType
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputConnection
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.*
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.filament.utils.HDRLoader
-import dev.romainguy.kotlin.math.lookAt
-import io.github.sceneview.SceneView
-import io.github.sceneview.environment.loadEnvironment
-import io.github.sceneview.math.Direction
-import io.github.sceneview.math.Position
-import io.github.sceneview.node.ModelNode
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 
 class SceneActivity : AppCompatActivity() {
-    lateinit var editText: EditText
-    lateinit var sceneView: SceneView
-    lateinit var linearLayout1: LinearLayout
-    lateinit var linearLayout2: LinearLayout
-    lateinit var keyboard: Keyboard
-     lateinit var recyclerView: RecyclerView
+    lateinit var recyclerView2: RecyclerView
+    lateinit var adapter2: Goadapter
+    lateinit var progressBar1: MaterialNeonProgressBar
+    lateinit var progressBar2: MaterialNeonProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scene)
-        recyclerView = findViewById(R.id.Recyler_view)
-        sceneView = findViewById(R.id.sceneview)
-        linearLayout2 = findViewById(R.id.ppp)
-        editText = findViewById(R.id.primaryedit)
-         keyboard = findViewById(R.id.myboard)
-        editText.setRawInputType(InputType.TYPE_CLASS_TEXT)
-        editText.setTextIsSelectable(true)
-        val inputConnection:InputConnection = editText.onCreateInputConnection(EditorInfo())
-        keyboard.setInputConnection(inputConnection)
-//     val param = LinearLayout.LayoutParams(
-//            LinearLayout.LayoutParams.MATCH_PARENT,
-//            LinearLayout.LayoutParams.WRAP_CONTENT,
-//            0f)
-//        linearLayout2.setLayoutParams(param)
-//        linearLayout1.setOnClickListener {
-//            val param1 = LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT,
-//                0.6f)
-//            linearLayout2.setLayoutParams(param1)
-//        }
-        val modelNode = ModelNode(
-            position = Position(x = 0.0f, y = 0.0f, z = 0.0f))
-        sceneView.addChild(modelNode)
+        adapter2 = Goadapter()
+        recyclerView2 = findViewById(R.id.ryc)
+        progressBar1 = findViewById(R.id.progressBar)
+        progressBar2 = findViewById(R.id.progressBarLoadMore)
+        recyclerView2.adapter = adapter2
+        lifecycleScope.launch(Dispatchers.IO){
+            val flow = Pager(PagingConfig(1)) {
+                qwePagingSource(FirebaseFirestore.getInstance())
+            }.flow.collect{
+                withContext(Dispatchers.Main){
+                    adapter2.submitData(it)
 
-        sceneView.cameraNode.transform = lookAt(
-            eye = modelNode.worldPosition.let {
-                Position(x = it.x - 0.28f, y = it.y + 0.2f, z = it.z + 0.1f)
-            },
-            target = modelNode.worldPosition,
-            up = Direction(y = 1.0f)
-        )
+                }
 
-        lifecycleScope.launchWhenCreated {
-           sceneView.environment = HDRLoader.loadEnvironment(
-               context = this@SceneActivity,
-               lifecycle = lifecycle,
-               hdrFileLocation = "environments/studio_small_08_2k.hdr",
-               specularFilter = true
-          )?.apply {
-               indirectLight?.intensity = 50_000f
             }
-            modelNode.loadModel(
-                    context = this@SceneActivity,
-                    lifecycle = lifecycle,
-                    glbFileLocation = "models/male.glb",
-                    scaleToUnits = 0.41f,
-                    centerOrigin = Position(x = 1.4f, y = -0.1f, z = 0.2f))
+        }
+
+
+        lifecycleScope.launch {
+            adapter2.loadStateFlow.collectLatest {
+                progressBar1.isVisible = it.refresh is LoadState.Loading
+                progressBar2.isVisible = it.append is LoadState.Loading
+            }
+        }
+
+        }
+
+    class qwePagingSource(private val db: FirebaseFirestore) : PagingSource<QuerySnapshot, fat>() {
+        override suspend fun load(params: LoadParams<QuerySnapshot>): LoadResult<QuerySnapshot, fat> {
+            return try {
+                val currentPage = params.key ?: db.collection("Usersname").limit(8).get().await()
+                val lastDocumentSnapshot = currentPage.documents[currentPage.size() - 1]
+                val nextPage = db.collection("Usersname")
+                    .limit(8).startAfter(lastDocumentSnapshot).get()
+                    .await()
+
+                LoadResult.Page(
+                    data = currentPage.toObjects(fat::class.java),
+                    prevKey = null,
+                    nextKey = nextPage
+                )
+            } catch (e: Exception) {
+                LoadResult.Error(e)
+            }
+        }
+
+        override fun getRefreshKey(state: PagingState<QuerySnapshot, fat>): QuerySnapshot? {
+            return null
         }
     }
+
 }
+

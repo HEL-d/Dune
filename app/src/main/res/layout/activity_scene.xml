@@ -1,61 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".SceneActivity">
+    tools:context=".SearchActivity">
+
+
+
+
+
+
+
 
  <androidx.recyclerview.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_weight="0.4"
-    android:id="@+id/Recyler_view"
-    tools:listitem="@layout/messageview"
-    android:layout_height="0dp">
- </androidx.recyclerview.widget.RecyclerView>
+     android:id="@+id/ryc"
+     android:layout_width="match_parent"
+     android:layout_height="0dp"
+     tools:listitem="@layout/viewsearch"
+     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintStart_toStartOf="parent"/>
 
 
+ <com.evw.aster.MaterialNeonProgressBar
+     android:id="@+id/progressBarLoadMore"
+     android:layout_width="42dp"
+     android:layout_height="42dp"
+     android:padding="10dp"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
+ <com.evw.aster.MaterialNeonProgressBar
+     android:id="@+id/progressBar"
+     android:layout_width="50dp"
+     android:layout_height="50dp"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toTopOf="@+id/ryc" />
 
 
 
-     <RelativeLayout
-         android:layout_width="match_parent"
-         android:layout_weight="0.7"
-         android:layout_height="0dp">
 
 
-         <io.github.sceneview.SceneView
-             android:id="@+id/sceneview"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent" />
 
-         <EditText
-             android:id="@+id/primaryedit"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_alignParentBottom="true"
-             android:inputType="textMultiLine"
-             android:maxLines="2"
-             android:textColor="@color/black" />
 
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
-              <ImageView
-                  android:layout_width="wrap_content"
-                  android:layout_alignParentBottom="true"
-                  android:layout_alignParentEnd="true"
-                  android:layout_marginBottom="10dp"
-                  android:background="@drawable/ic_baseline_send_24"
-                  android:layout_marginEnd="15dp"
-                  android:layout_height="wrap_content"/>
 
 
 
 
 
-     </RelativeLayout>
 
 
 
@@ -75,25 +74,12 @@
 
 
 
-    <LinearLayout
-          android:layout_width="match_parent"
-          android:id="@+id/ppp"
-          android:layout_height="0dp"
-          android:layout_weight="0.5"
-        android:background="#fffafa"
-          android:orientation="horizontal">
 
-         <com.evw.aster.Keyboard
-             android:layout_width="match_parent"
-             android:orientation="vertical"
-             android:id="@+id/myboard"
-             android:layout_height="wrap_content"/>
 
 
 
 
 
-      </LinearLayout>
 
 
 
@@ -125,4 +111,6 @@
 
 
 
-</LinearLayout>
+
+
+

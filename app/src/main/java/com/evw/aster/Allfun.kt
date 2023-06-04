@@ -1,6 +1,10 @@
 package com.evw.aster
 
-
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
+import kotlinx.coroutines.tasks.await
 
 
 class Allfun {}
@@ -200,3 +204,31 @@ class Allfun {}
 //}
 //
 //
+ /*  class FirestorePagingSource(private val db: FirebaseFirestore, private val newText:String) : PagingSource<QuerySnapshot, fat>() {
+    override suspend fun load(params: LoadParams<QuerySnapshot>): LoadResult<QuerySnapshot, fat> {
+        return try {
+            val currentPage = params.key ?: db.collection("Usersname")
+                .whereGreaterThanOrEqualTo("username", newText)
+                .whereLessThanOrEqualTo("username", newText + '\uf8ff').limit(8).get().await()
+            val lastDocumentSnapshot = currentPage.documents[currentPage.size() - 1]
+            val nextPage = db.collection("Usersname")
+                .whereGreaterThanOrEqualTo("username", newText)
+                .whereLessThanOrEqualTo("username", newText + '\uf8ff')
+                .limit(8).startAfter(lastDocumentSnapshot).get()
+                .await()
+
+            LoadResult.Page(
+                data = currentPage.toObjects(fat::class.java),
+                prevKey = null,
+                nextKey = nextPage
+            )
+        } catch (e: Exception) {
+            LoadResult.Error(e)
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState<QuerySnapshot, fat>): QuerySnapshot? {
+        return null
+    }
+}   */
+

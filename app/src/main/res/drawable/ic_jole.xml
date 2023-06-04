@@ -1,8 +1,12 @@
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval">
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <solid
-      android:color="#B3FF0000"/>
-
-
-</shape>
+    <item
+        android:state_focused="true"
+        android:drawable="@drawable/vivo"
+        /> <!-- focused -->
+    <item
+        android:drawable="@drawable/z"
+        /> <!-- default -->
+</selector>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingBottom="25dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/reply"
+        android:layout_marginTop="10dp"
+        app:layout_constraintVertical_bias="0"
+        android:background="@drawable/rippleefffect"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/Transparent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:id="@+id/username"
+            android:layout_marginStart="15dp"
+            android:background="@color/Transparent"
+            android:layout_marginTop="2dp"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/username"
+            android:text="In my contact"
+            android:textColor="#808080"
+            android:id="@+id/scv"
+            android:layout_marginStart="15dp"
+            android:background="@color/Transparent"
+            android:layout_marginTop="2dp"
+            android:textSize="14sp"/>
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
+            android:layout_marginStart="12dp"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/chip_now"
+            android:text="visit profile"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="15dp"
+            android:textAppearance="@style/chipText"
+            android:textColor="@color/black"
+            app:chipBackgroundColor="@color/Aster_neo"/>
+
+
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

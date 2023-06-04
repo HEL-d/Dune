@@ -1,17 +1,9 @@
 package com.evw.aster
 
-import android.content.Context
-import android.text.TextUtils
-import android.util.AttributeSet
-import kotlin.jvm.JvmOverloads
-import android.widget.LinearLayout
-import android.util.SparseArray
-import android.view.inputmethod.InputConnection
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.Button
-import com.evw.aster.R
+class Keyboard (){
 
+}
+/*
 class Keyboard @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -72,4 +64,5 @@ class Keyboard @JvmOverloads constructor(
     init {
         init(context, attrs)
     }
-}
+*/
+  // }

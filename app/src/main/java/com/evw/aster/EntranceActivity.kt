@@ -1,23 +1,60 @@
 package com.evw.aster
+import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import com.bumptech.glide.Glide
-import io.realm.mongodb.App
-import io.realm.mongodb.AppConfiguration
+import androidx.appcompat.widget.AppCompatButton
+import com.smb.glowbutton.GlowButton
+
 
 class EntranceActivity : AppCompatActivity() {
-    val appid:String = "astergen2-ijwce"
-    lateinit var imageView: ImageView
-    val app = App(AppConfiguration.Builder(appid).build())
+    lateinit var internetConnectivity: InternetConnectivity
+    lateinit var SignUP: GlowButton
+     lateinit var Login: AppCompatButton
+     lateinit var networkbox: Networkbox
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_entrance)
-        imageView = findViewById(R.id.vvvv)
+         SignUP = findViewById(R.id.chip2)
+         Login = findViewById(R.id.chip)
+         networkbox = Networkbox()
+        internetConnectivity = InternetConnectivity()
+         SignUP.setOnClickListener {
+          internetConnectivity.checkInternetConnection(object:InternetConnectivity.ConnectivityCallback{
+              override fun onDetected(isConnected: Boolean) {
+                  if (isConnected){
+                      startActivity(Intent(this@EntranceActivity,BasicinfoActivity::class.java))
+
+                  } else {
+                    networkbox.shownetworkdialog(this@EntranceActivity)
+                  }
+
+
+
+
+              }
+
+          },this)
+
+
+         }
+              Login.setOnClickListener {
+                 internetConnectivity.checkInternetConnection(object:InternetConnectivity.ConnectivityCallback{
+                     override fun onDetected(isConnected: Boolean) {
+                         if (isConnected){
+                             startActivity(Intent(this@EntranceActivity,AlreadyAccount::class.java))
+
+                         } else {
+                             networkbox.shownetworkdialog(this@EntranceActivity)
+                         }
+                     }
+                 },this)
+        }
+
+
 
 
 
     }
+
+
 }

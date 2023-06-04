@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingBottom="15dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:id="@+id/rlps"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:id="@+id/namecloud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="Name"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/namecloud"
+            android:id="@+id/request"
+            android:textSize="18sp" />
+
+        <com.caverock.androidsvg.SVGImageView
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_alignParentEnd="true"
+            app:svg="lefthand.svg" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/namecloud"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:text="Accept"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:chipBackgroundColor="@color/Aster_neo" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/namecloud"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/accept"
+            android:text="Decline"
+            android:id="@+id/decline"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            app:chipBackgroundColor="@color/black"
+            app:chipStrokeColor="@color/white"
+            app:chipStrokeWidth="1dp" />
+
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:textSize="18sp"
+                 android:layout_below="@id/namecloud"
+                 android:background="@color/Transparent"
+                 android:layout_marginStart="15dp"
+                 android:id="@+id/lptext"
+                 android:layout_height="wrap_content"/>
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+</RelativeLayout>

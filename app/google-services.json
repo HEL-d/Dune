@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "849375417951",
+    "firebase_url": "https://aster-91b3b-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "aster-91b3b",
+    "storage_bucket": "aster-91b3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849375417951:android:5ecbbd89613dfeb5106dea",
+        "android_client_info": {
+          "package_name": "com.evw.aster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849375417951-335uq2ntgf3ahaiqinfdo17ct8ociv4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.evw.aster",
+            "certificate_hash": "0ed047762027c1796110f0e416bc45e015e50af3"
+          }
+        },
+        {
+          "client_id": "849375417951-dft4njb2vlujf3bgoo0ehr9beebhltj1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbH6d9xF55pL8KKq4mex3IYCUBUHbwdMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849375417951-dft4njb2vlujf3bgoo0ehr9beebhltj1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".friendListFragment">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Friends list"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:id="@+id/friendstext"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="55dp"
+        android:id="@+id/cvc"
+        app:shapeAppearance="@style/floatbutton"
+        app:icon="@drawable/baseline_add_24"
+        app:iconTint="@color/black"
+        android:textAppearance="@style/chipText"
+        android:backgroundTint="@color/Aster_neo"
+        android:text="Add Friend"
+        android:layout_marginEnd="1dp"
+        app:iconPadding="3dp"
+        android:fontFamily="@font/lato"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/nmo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="0dp"
+        android:text="Mark as read"
+        android:textColor="@color/black"
+        app:chipBackgroundColor="@color/white"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginStart="15dp"
+        android:visibility="gone"
+        app:ensureMinTouchTargetSize="false"
+        app:layout_constraintBottom_toTopOf="@+id/swipe_lay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/friendstext"
+        tools:ignore="TouchTargetSizeCheck" />
+
+
+
+
+
+
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/swipe_lay"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/progressBarLoadMore"
+        app:layout_constraintTop_toBottomOf="@+id/friendstext">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/first_recylerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/friendslist"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+
+
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+
+
+
+    <com.evw.aster.MaterialNeonProgressBar
+        android:padding="10dp"
+        android:id="@+id/progressBarLoadMore"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:visibility="gone"
+        android:background="@color/Transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.evw.aster.MaterialNeonProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:visibility="gone"
+        android:background="@color/Transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/friendstext" />
+
+
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

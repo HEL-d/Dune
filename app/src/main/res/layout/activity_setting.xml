@@ -12,39 +12,81 @@
 
 
 
+
+
+
     <TextView
+        android:id="@+id/settting"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="26dp"
         android:text="Settings"
+        android:layout_alignParentTop="true"
         android:textSize="18sp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/lato"
-        android:textStyle="bold"
-        android:layout_marginStart="60dp"
-        android:layout_height="wrap_content"/>
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="50dp"
+        android:layout_marginStart="10dp"
+        app:cardElevation="8dp"
+        android:id="@+id/pop"
+        android:background="@drawable/circleripple"
+        android:clickable="true"
+        android:layout_marginTop="10dp"
+        android:layout_height="50dp"
+        android:focusable="true" />
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="34dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/backbutton"
+        app:cardElevation="8dp"
+        android:id="@+id/asa"
+        android:layout_marginTop="19dp"
+        android:layout_height="34dp">
+
+        <ImageView
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/baseline_arrow_back_ios_new_24" />
+    </RelativeLayout>
+
 
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/settting"
         android:layout_marginStart="8dp"
         android:id="@+id/sssg"
-        android:layout_height="wrap_content">
+        android:clickable="true"
+        android:background="@drawable/rippleefffect"
+        android:layout_height="wrap_content"
+        android:focusable="true">
 
 
         <com.caverock.androidsvg.SVGImageView
             android:layout_width="60dp"
             android:id="@+id/oop1"
             app:svg="blue.svg"
+            android:background="@color/Transparent"
             android:layout_marginTop="5dp"
             android:layout_height="52dp"/>
 
 
         <TextView
             android:layout_width="wrap_content"
-            android:text="Privacy"
+            android:text="Privacy &amp; security"
             android:layout_marginStart="3dp"
+            android:background="@color/Transparent"
             android:textSize="17sp"
             android:layout_marginTop="22dp"
             android:fontFamily="@font/lato"
@@ -57,24 +99,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginStart="15dp"
         android:layout_below="@+id/mkl"
+        android:clickable="true"
+        android:background="@drawable/rippleefffect"
         android:id="@+id/nnn"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:focusable="true">
 
 
         <com.caverock.androidsvg.SVGImageView
             android:layout_width="42dp"
             android:id="@+id/oop2"
             app:svg="about.svg"
+            android:background="@color/Transparent"
             android:layout_height="42dp"/>
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
+            android:layout_marginStart="11dp"
+            android:background="@color/Transparent"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/lato"
             android:text="About aster"
@@ -88,16 +135,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginStart="15dp"
+        android:clickable="true"
+        android:background="@drawable/rippleefffect"
         android:layout_below="@+id/sssg"
         android:id="@+id/mmm"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:focusable="true">
 
 
         <com.caverock.androidsvg.SVGImageView
             android:layout_width="42dp"
             android:id="@+id/zxc"
+            android:background="@color/Transparent"
             app:svg="notification.svg"
             android:layout_height="42dp"/>
 
@@ -107,6 +158,74 @@
             android:text="Notification"
             android:layout_marginStart="11dp"
             android:textSize="17sp"
+            android:background="@color/Transparent"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/lato"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:clickable="true"
+        android:layout_marginStart="13dp"
+        android:background="@drawable/rippleefffect"
+        android:layout_below="@+id/mmm"
+        android:id="@+id/volvo"
+        android:layout_height="wrap_content"
+        android:focusable="true">
+
+
+        <com.caverock.androidsvg.SVGImageView
+            android:layout_width="45dp"
+            android:background="@color/Transparent"
+            app:svg="pi.svg"
+            android:layout_height="45dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Personal info"
+            android:layout_marginStart="11dp"
+            android:textSize="17sp"
+            android:background="@color/Transparent"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/lato"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_below="@+id/volvo"
+        android:clickable="true"
+        android:background="@drawable/rippleefffect"
+        android:id="@+id/mkl"
+        android:layout_height="wrap_content"
+        android:focusable="true">
+
+
+        <com.caverock.androidsvg.SVGImageView
+            android:layout_width="33dp"
+            android:id="@+id/mno"
+            app:svg="love.svg"
+            android:background="@color/Transparent"
+            android:layout_height="33dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Invite friends"
+            android:textSize="17sp"
+           android:layout_marginStart="20dp"
+            android:background="@color/Transparent"
             android:layout_marginTop="7dp"
             android:fontFamily="@font/lato"
             android:layout_height="wrap_content"/>
@@ -117,64 +236,6 @@
 
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="15dp"
-        android:layout_below="@+id/mmm"
-        android:id="@+id/mkl"
-        android:layout_height="wrap_content">
-
-
-        <com.caverock.androidsvg.SVGImageView
-            android:layout_width="33dp"
-            android:id="@+id/mno"
-            app:svg="love.svg"
-            android:layout_height="33dp"/>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="Invite friends"
-            android:textSize="17sp"
-           android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/lato"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="15dp"
-        android:layout_below="@id/nnn"
-        android:id="@+id/khl"
-        android:layout_height="wrap_content">
-
-
-        <com.caverock.androidsvg.SVGImageView
-            android:layout_width="47dp"
-            android:id="@+id/aaa"
-            app:svg="paint.svg"
-            android:layout_height="46dp"/>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="Set theme"
-            android:textSize="17sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/lato"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
 
 
 
@@ -183,14 +244,19 @@
         android:orientation="horizontal"
         android:layout_marginTop="15dp"
         android:layout_marginStart="10dp"
-        android:layout_below="@+id/khl"
-        android:layout_height="wrap_content">
+        android:layout_below="@+id/nnn"
+        android:clickable="true"
+        android:id="@+id/por"
+        android:background="@drawable/rippleefffect"
+        android:layout_height="wrap_content"
+        android:focusable="true">
 
 
         <com.caverock.androidsvg.SVGImageView
             android:layout_width="75dp"
             android:id="@+id/lpo"
             app:svg="helpcenter.svg"
+            android:background="@color/Transparent"
             android:paddingStart="-30dp"
             android:layout_height="75dp"/>
 
@@ -199,6 +265,7 @@
             android:layout_width="wrap_content"
             android:text="Help center"
             android:textSize="17sp"
+            android:background="@color/Transparent"
             android:layout_marginStart="-15dp"
             android:layout_marginTop="23dp"
             android:fontFamily="@font/lato"
