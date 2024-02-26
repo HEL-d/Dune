@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:paddingBottom="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="35dp"
     android:layout_height="wrap_content">
 
     <RelativeLayout
@@ -9,46 +10,67 @@
         android:layout_marginStart="5dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="5dp"
-        android:paddingBottom="15dp"
+        android:id="@+id/mich_rel"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:background="@color/Transparent"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/vc"
-            android:id="@+id/cc"
-            android:textSize="17sp"
-            android:layout_height="wrap_content"/>
-
-        <TextView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:id="@+id/card"
+            app:cardCornerRadius="4dp"
+            app:cardBackgroundColor="@color/Transparent">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:id="@+id/contactdata_view"
+                android:background="@color/white"
+                android:src="@drawable/blankprofile"
+                android:layout_height="50dp"/>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
             android:id="@+id/vc"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
-            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/card"
             android:background="@color/Transparent"
             android:maxLines="1"
-            android:textColor="#808080" />
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="13dp"
+            android:textSize="18sp" />
 
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_below="@id/vc"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="7dp"
-            android:layout_toEndOf="@+id/cc"
-            android:background="@drawable/baseline_fiber_manual_record_24" />
+        <TextView
+            android:id="@+id/cc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vc"
+            android:layout_toEndOf="@+id/card"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/Transparent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="1"
+                android:visibility="gone"
+                android:id="@+id/no_count"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:textSize="15sp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/black"
+                android:background="@drawable/msgnotify"
+                android:layout_height="wrap_content"/>
 
 
 

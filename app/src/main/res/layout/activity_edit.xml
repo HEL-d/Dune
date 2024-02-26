@@ -128,6 +128,29 @@
 
     </EditText>
 
+    <EditText
+        android:id="@+id/bio_now"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:background="@drawable/ic_jole"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/white"
+        android:inputType="none"
+        android:textColorHint="#808080"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textSize="17sp"
+        android:hint="Bio"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birthday_now"/>
+
+
+
 
     <com.smb.glowbutton.GlowButton
         android:id="@+id/button_save"
@@ -148,7 +171,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birthday_now" />
+        app:layout_constraintTop_toBottomOf="@+id/bio_now" />
 
 
     <TextView

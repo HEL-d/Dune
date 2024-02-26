@@ -23,7 +23,7 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="86dp"
             android:layout_marginTop="10dp"
             android:background="@color/Transparent"
             android:textSize="18sp"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/name"
             android:id="@+id/username"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="86dp"
             android:background="@color/Transparent"
             android:layout_marginTop="2dp"
             android:textSize="15sp"/>
@@ -47,7 +47,7 @@
             android:text="In my contact"
             android:textColor="#808080"
             android:id="@+id/scv"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="86dp"
             android:background="@color/Transparent"
             android:layout_marginTop="2dp"
             android:textSize="14sp"/>
@@ -66,7 +66,22 @@
             app:chipBackgroundColor="@color/Aster_neo"/>
 
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"
+            app:cardCornerRadius="4dp"
+            app:cardBackgroundColor="@color/Transparent">
 
+            <ImageView
+                android:layout_width="50dp"
+                android:id="@+id/contactdata_view"
+                android:background="@color/white"
+                android:src="@drawable/blankprofile"
+                android:layout_height="50dp"/>
+        </com.google.android.material.card.MaterialCardView>
 
 
 

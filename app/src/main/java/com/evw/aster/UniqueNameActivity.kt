@@ -40,10 +40,16 @@ class UniqueNameActivity : AppCompatActivity() {
         initDialog()
         editText = findViewById(R.id.username)
         button = findViewById(R.id.button_name)
-
+        val allowedChars = ('0'..'9')+('@')+('.')+('_')
+        val lenth = ('1'..'5')
+         val getrandomusrname = lenth.map {
+             allowedChars.random()
+         }.joinToString("")
+        val giveusername = name.take(3) + getrandomusrname
+        editText.setText(giveusername)
         button.setOnClickListener {
             if ((editText.text?.isEmpty() == true) || (editText.text.length < 6) || (!(isValidPassword(editText.text.toString())).first) && !(isValidPassword(editText.text.toString())).second ) {
-                viewDialog.showDialog(this, "username should be unique", "Use mix of atleast 6 numbers and letters")
+                viewDialog.showDialog(this, "username should be unique", "Use mix of numbers and letters whose length is 6")
             } else {
                 internetConnectivity.checkInternetConnection(object:InternetConnectivity.ConnectivityCallback{
                     override fun onDetected(isConnected: Boolean) {

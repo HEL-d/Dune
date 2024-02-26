@@ -5,14 +5,17 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.view.View
 import android.view.Window
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseException
-import com.google.firebase.auth.*
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.PhoneAuthProvider.ForceResendingToken
 import com.google.firebase.firestore.FirebaseFirestore
 import com.smb.glowbutton.GlowButton
@@ -23,7 +26,6 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 
@@ -47,6 +49,7 @@ class OTPActivity : AppCompatActivity() {
       lateinit var progressbardialog:Dialog
       lateinit var exceptiondialogclass: exceptiondialogclass
       lateinit var newbox: newbox
+    var originalnumber:String? = null
  //   private val VERIFICATION_ID_KEY = "verification_id"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +81,7 @@ class OTPActivity : AppCompatActivity() {
        birthday = intent.getStringExtra("birthday").toString()
        username = intent.getStringExtra("username").toString()
        phoneNumber = intent.getStringExtra("phoneNumber").toString()
+       originalnumber = phoneNumber.substring(3)
        textView.setOnClickListener {
            internetConnectivity.checkInternetConnection(object:InternetConnectivity.ConnectivityCallback{
                override fun onDetected(isConnected: Boolean) {
@@ -278,10 +282,13 @@ class OTPActivity : AppCompatActivity() {
     private suspend fun finalUI() {
         withContext(Dispatchers.Main){
             progressbardialog.dismiss()
-           val intent:Intent = Intent(applicationContext,MainActivity::class.java)
+           val intent:Intent = Intent(applicationContext,avatargen::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra("avatarbool","false")
+            intent.putExtra("username",username)
+            intent.putExtra("phonenumber",originalnumber)
             startActivity(intent)
             finish()
 

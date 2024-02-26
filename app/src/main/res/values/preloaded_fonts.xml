@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/</item>
         <item>@font/berkshire_swash</item>
+        <item>@font/chewy</item>
+        <item>@font/cinzel_decorative_bold</item>
+        <item>@font/fascinate</item>
+        <item>@font/kalam</item>
         <item>@font/lato</item>
+        <item>@font/metal_mania</item>
+        <item>@font/monofett</item>
+        <item>@font/nova_script</item>
+        <item>@font/nova_slim</item>
         <item>@font/open_sans</item>
+        <item>@font/orbitron_bold</item>
+        <item>@font/oswald_medium</item>
+        <item>@font/pacifico</item>
+        <item>@font/playball</item>
+        <item>@font/redressed</item>
+        <item>@font/sarina</item>
+        <item>@font/shrikhand</item>
+        <item>@font/trade_winds</item>
+        <item>@font/ubuntu_medium_italic</item>
+        <item>@font/uncial_antiqua</item>
+        <item>@font/vampiro_one</item>
+        <item>@font/zhi_mang_xing</item>
     </array>
 </resources>

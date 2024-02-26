@@ -14,7 +14,6 @@
 
 
 
-
     <TextView
         android:id="@+id/settting"
         android:layout_width="wrap_content"
@@ -198,13 +197,48 @@
     </LinearLayout>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:clickable="true"
+        android:layout_marginStart="13dp"
+        android:background="@drawable/rippleefffect"
+        android:layout_below="@+id/volvo"
+        android:id="@+id/mich_lin"
+        android:layout_height="wrap_content"
+        android:focusable="true">
+
+
+        <com.caverock.androidsvg.SVGImageView
+            android:layout_width="44dp"
+            android:background="@color/Transparent"
+            app:svg="msg.svg"
+            android:layout_height="44dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Adjust chat view"
+            android:layout_marginStart="11dp"
+            android:textSize="17sp"
+            android:background="@color/Transparent"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/lato"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_marginTop="30dp"
         android:layout_marginStart="15dp"
-        android:layout_below="@+id/volvo"
+        android:layout_below="@+id/mich_lin"
         android:clickable="true"
         android:background="@drawable/rippleefffect"
         android:id="@+id/mkl"

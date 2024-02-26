@@ -6,7 +6,7 @@ class DifClass(private val oldList: List<run>, private val newList: List<run>) :
     override fun getOldListSize(): Int = oldList.size
     override fun getNewListSize(): Int = newList.size
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].timestamp === newList[newItemPosition].timestamp
+        return oldList[oldItemPosition].roomid === newList[newItemPosition].roomid
     }
     override fun areContentsTheSame(oldCourse: Int, newPosition: Int): Boolean {
         val (_, value, name) = oldList[oldCourse]

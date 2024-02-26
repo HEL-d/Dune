@@ -2,9 +2,17 @@ package com.evw.aster
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
+import android.view.animation.TranslateAnimation
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class SettingActivity : AppCompatActivity() {
@@ -15,6 +23,9 @@ class SettingActivity : AppCompatActivity() {
     lateinit var linearLayout4: LinearLayout
     lateinit var linearLayout5: LinearLayout
     lateinit var linearLayout6: LinearLayout
+    lateinit var linearLayout7: LinearLayout
+    val uid = FirebaseAuth.getInstance().currentUser?.uid
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
@@ -25,6 +36,7 @@ class SettingActivity : AppCompatActivity() {
         linearLayout4 = findViewById(R.id.mkl)
         linearLayout5 = findViewById(R.id.por)
         linearLayout6 = findViewById(R.id.nnn)
+        linearLayout7 = findViewById(R.id.mich_lin)
         linearLayout.setOnClickListener {
          startActivity(Intent(this,PrivacyActivity::class.java))
         }
@@ -46,6 +58,27 @@ class SettingActivity : AppCompatActivity() {
         linearLayout6.setOnClickListener {
             startActivity(Intent(this,AboutActivity::class.java))
         }
+
+        linearLayout7.setOnClickListener {
+            FirebaseFirestore.getInstance().collection("Users").document(uid.toString()).get().addOnCompleteListener {
+                val url = it.result.get("avatarurl")
+                val ppc = uid?.take(4)
+                if (url != null){
+                    val intent: Intent = Intent(Intent(this,MichActive::class.java))
+                    intent.putExtra("url",url.toString())
+                    intent.putExtra("ppc",ppc)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this,"You don't have Avatar yet,",Toast.LENGTH_LONG).show()
+                }
+
+            }
+
+
+
+        }
+
+
 
     }
 }

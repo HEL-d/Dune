@@ -1,28 +1,42 @@
 package com.evw.aster
 import android.os.Bundle
+import android.view.MotionEvent
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
-import androidx.paging.*
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 
 class SceneActivity : AppCompatActivity() {
-    lateinit var recyclerView2: RecyclerView
+    lateinit var linearLayout: LinearLayout
+   /* lateinit var recyclerView2: RecyclerView
     lateinit var adapter2: Goadapter
     lateinit var progressBar1: MaterialNeonProgressBar
-    lateinit var progressBar2: MaterialNeonProgressBar
+    lateinit var progressBar2: MaterialNeonProgressBar*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scene)
-        adapter2 = Goadapter()
+       linearLayout = findViewById(R.id.lan)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     /*   adapter2 = Goadapter()
         recyclerView2 = findViewById(R.id.ryc)
         progressBar1 = findViewById(R.id.progressBar)
         progressBar2 = findViewById(R.id.progressBarLoadMore)
@@ -45,12 +59,24 @@ class SceneActivity : AppCompatActivity() {
                 progressBar1.isVisible = it.refresh is LoadState.Loading
                 progressBar2.isVisible = it.append is LoadState.Loading
             }
-        }
+        }*/
 
         }
 
-    class qwePagingSource(private val db: FirebaseFirestore) : PagingSource<QuerySnapshot, fat>() {
-        override suspend fun load(params: LoadParams<QuerySnapshot>): LoadResult<QuerySnapshot, fat> {
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        val pointerId = event.getPointerId(0)
+        val pointerIndex = event.findPointerIndex(pointerId)
+        // Get the pointer's current position
+        val x = event.getX(pointerIndex)
+        val y = event.getY(pointerIndex)
+        println("X:$x")
+        println("Y:$y")
+        return true
+    }
+
+    class qwePagingSource(private val db: FirebaseFirestore) : PagingSource<QuerySnapshot, Searchavatarclass>() {
+        override suspend fun load(params: LoadParams<QuerySnapshot>): LoadResult<QuerySnapshot, Searchavatarclass> {
             return try {
                 val currentPage = params.key ?: db.collection("Usersname").limit(8).get().await()
                 val lastDocumentSnapshot = currentPage.documents[currentPage.size() - 1]
@@ -59,7 +85,7 @@ class SceneActivity : AppCompatActivity() {
                     .await()
 
                 LoadResult.Page(
-                    data = currentPage.toObjects(fat::class.java),
+                    data = currentPage.toObjects(Searchavatarclass::class.java),
                     prevKey = null,
                     nextKey = nextPage
                 )
@@ -68,7 +94,7 @@ class SceneActivity : AppCompatActivity() {
             }
         }
 
-        override fun getRefreshKey(state: PagingState<QuerySnapshot, fat>): QuerySnapshot? {
+        override fun getRefreshKey(state: PagingState<QuerySnapshot, Searchavatarclass>): QuerySnapshot? {
             return null
         }
     }

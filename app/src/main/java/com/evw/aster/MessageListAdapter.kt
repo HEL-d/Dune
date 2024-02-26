@@ -4,18 +4,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 
 class MessageListAdapter:ListAdapter<run, MessageListAdapter.MessageViewHolder>(Diffutils()) {
+
+    fun appendList(newList:List<run>){
+        val currentList = currentList.toMutableList()
+        currentList.addAll(newList)
+        submitList(currentList)
+
+    }
+
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.messagelist_layout,parent,false)
         return MessageViewHolder(view)
 
     }
+
+
+
+
+
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val item = getItem(position)
@@ -23,6 +37,13 @@ class MessageListAdapter:ListAdapter<run, MessageListAdapter.MessageViewHolder>(
             holder.bind(item)
         }
     }
+
+
+
+
+
+
+
 
 
     class MessageViewHolder(itemview: View): RecyclerView.ViewHolder(itemview) {

@@ -22,8 +22,8 @@
             android:id="@+id/namecloud"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="86dp"
+            android:layout_marginTop="17dp"
             android:background="@color/Transparent"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/namecloud"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="86dp"
             android:id="@+id/name_v"
             android:textColor="#808080"
             android:background="@color/Transparent"
@@ -47,7 +47,7 @@
             android:layout_alignParentEnd="true"
             android:text="Remove"
             android:id="@+id/remove"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="10dp"
             android:textSize="16sp"
             android:textColor="@color/white"
@@ -55,6 +55,31 @@
             app:chipBackgroundColor="@color/black"
             app:chipStrokeColor="@color/white"
             app:chipStrokeWidth="1dp" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"
+            app:cardCornerRadius="4dp"
+            app:cardBackgroundColor="@color/Transparent">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:id="@+id/friendsprofile_view"
+                android:background="@color/white"
+                android:src="@drawable/blankprofile"
+                android:layout_height="50dp"/>
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+
+
 
 
     </RelativeLayout>

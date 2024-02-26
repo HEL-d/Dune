@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="5dp"
-        android:text="Use a mix of at least 6 number and letters"
+        android:text="Use mix of numbers and letters whose length is 6 atleast"
         android:textColor="#808080"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"

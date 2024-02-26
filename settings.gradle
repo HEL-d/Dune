@@ -5,13 +5,23 @@ pluginManagement {
         mavenCentral()
     }
 }
+
+rootProject.name = "Aster.gen2"
+include ':app'
+include ':unityLibrary'
+project(':unityLibrary').projectDir=new File('C:\\Users\\sonu computer\\gen2\\unityLibrary')
+
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        maven { url 'https://jitpack.io' }
         google()
+        maven { url 'https://jitpack.io' }
         mavenCentral()
+        flatDir {
+            dirs "${project(':unityLibrary').projectDir}/libs"
+        }
     }
 }
-rootProject.name = "Aster.gen2"
-include ':app'
+
+

@@ -17,20 +17,15 @@
             android:id="@+id/bias"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="86dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
-            android:textStyle="bold"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="86dp"
             android:textSize="16sp"
             android:id="@+id/hasd"
             android:layout_below="@id/bias"
@@ -42,15 +37,24 @@
             app:layout_constraintTop_toBottomOf="@+id/bias" />
 
 
-        <com.caverock.androidsvg.SVGImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
-            android:layout_alignParentEnd="true"
-            app:svg="up.svg" />
+            app:cardCornerRadius="4dp"
+            app:cardBackgroundColor="@color/Transparent">
 
-
+            <ImageView
+                android:layout_width="50dp"
+                android:id="@+id/serachprofile_view"
+                android:background="@color/white"
+                android:src="@drawable/blankprofile"
+                android:layout_height="50dp"/>
+        </com.google.android.material.card.MaterialCardView>
 
 
 

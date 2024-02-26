@@ -5,19 +5,74 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/containerhere"
     tools:context=".SceneActivity">
 
 
+
+
+
+
+
+
+
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/lin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+
+
+
     <TextView
+        android:id="@+id/no_avatra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="Vishalpratap319"
+        android:textSize="18sp"
+        android:text="No avatar found"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/lin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/no_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Aster_neo"
+        android:visibility="gone"
+        android:text="Create avatar"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/lin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/no_avatra" />
+
+
+    <TextView
+        android:id="@+id/username_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/Transparent"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,6 +93,11 @@
 
 
     </RelativeLayout>
+
+
+
+
+
 
     <com.caverock.androidsvg.SVGImageView
         android:layout_width="45dp"
@@ -81,90 +141,93 @@
         app:svg="pencil.svg" />
 
 
-    <com.google.android.material.card.MaterialCardView
+    <com.evw.aster.MaterialNeonProgressBar
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/profile_bar"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/webview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/lin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cardElevation="12dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="10dp"
-        app:cardBackgroundColor="@color/blackbc"
         app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="Name"
-            android:background="@color/Transparent"
-            android:textSize="16sp"
 
-            android:layout_marginTop="12dp"
-            android:layout_marginStart="15dp"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"/>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/ash"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="12dp">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="Vishal pratap"
-            android:maxLength="26"
-            android:background="@color/Transparent"
-            android:textSize="16sp"
-            android:layout_marginTop="37dp"
-            android:layout_marginStart="15dp"
-            android:textStyle="bold"
-            android:layout_marginBottom="25dp"
-            android:layout_height="wrap_content"/>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/Transparent"
+                app:cardCornerRadius="4dp">
 
-
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:background="@drawable/ripplefor"
-            android:layout_gravity="right"
-            android:clickable="true"
-            android:layout_marginTop="5dp"
-            android:focusable="true"
-            android:id="@+id/conn"
-            android:layout_marginEnd="15dp"
-            android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/profile_view"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:background="@color/white"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/blankprofile" />
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
+                android:id="@+id/name_profile"
                 android:layout_width="wrap_content"
-                android:text="Connection"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:background="@color/Transparent"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="39dp"
+                android:backgroundTint="@color/Transparent"
+                android:textSize="19sp"
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/bio_profile"
                 android:layout_width="wrap_content"
-                android:text="500"
-                android:background="@color/Transparent"
-                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="66dp"
+                android:backgroundTint="@color/Transparent"
+                android:text="Add a bio"
+                android:textSize="18sp" />
+
+
+            <TextView
+                android:id="@+id/details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="120dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/Transparent"
+                android:text="View friends    >"
                 android:textSize="16sp"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="32dp"
-                android:layout_height="wrap_content"/>
-
-        </RelativeLayout>
+                android:textStyle="bold" />
 
 
+        </com.google.android.material.card.MaterialCardView>
 
 
-
-
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-
-
-
+    </LinearLayout>
 
 
 

@@ -1,10 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+
     <style name="Theme.Astergen2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
+
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/white</item>
         <item name="colorSecondaryVariant">@color/white</item>
@@ -20,27 +22,18 @@
         <item name="android:background">@color/black</item>
         <item name="android:editTextColor">@color/white</item>
         <item name="android:textColorHint">#808080</item>
+
+
+
+
+
     </style>
-
-    <style name="Theme.Astergen2.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/black</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/point</item>
-        <item name="windowSplashScreenAnimationDuration">500</item>
-        <item name="postSplashScreenTheme">@style/Theme.Astergen2</item>
-    </style>
-
-
-
-
-
-
 
 
 
 
     <style name="chipText" parent="TextAppearance.MaterialComponents.Chip">
         <item name="android:textSize">15sp</item>
-
         <item name="android:fontFamily">@font/lato</item>
     </style>
 
@@ -56,6 +49,12 @@
        <item name="cornerSizeBottomLeft">18dp</item>
        <item name="cornerSizeBottomRight">0dp</item>
    </style>
+
+    <style name="ChipTextStyle_Selected">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 
 
 

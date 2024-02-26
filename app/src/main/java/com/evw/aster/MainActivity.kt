@@ -1,19 +1,32 @@
 package com.evw.aster
+
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.*
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
@@ -27,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
 lateinit var bottomNavigationView: BottomNavigationView
 lateinit var relativelayout: RelativeLayout
+
 lateinit var textview1:TextView
 lateinit var textview2:TextView
     lateinit var mauth:FirebaseAuth
@@ -44,6 +58,14 @@ lateinit var textview2:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val token = intent.getStringExtra("fc")
+        if (token != null){
+            sendtokentoserver()
+        }else{
+          
+        }
+        askNotificationPermission()
+
         mauth = FirebaseAuth.getInstance()
         textview1 = findViewById(R.id.mich_text)
         textview2 = findViewById(R.id.friendList_text)
@@ -96,7 +118,7 @@ lateinit var textview2:TextView
                     return@setOnItemReselectedListener
                 }
                 R.id.friendlist ->{
-                    loadFragment(friendListFragment())
+                    addActivity()
                     return@setOnItemReselectedListener
                 }
 
@@ -113,7 +135,19 @@ lateinit var textview2:TextView
 
     }
 
+    private fun sendtokentoserver() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            if (it.isSuccessful){
+                val tok = it.result
+                val data = hashMapOf<String,Any>("fcm" to tok.toString())
+                FirebaseFirestore.getInstance().collection("Users").document(uid.toString()).update(data).addOnSuccessListener {
+                    FirebaseDatabase.getInstance().getReference("FCMTokens").child(uid.toString()).child("token").setValue(tok.toString())
+                }
+            }
+        }
 
+
+    }
 
 
     private fun setonclicklistner() {
@@ -130,13 +164,15 @@ lateinit var textview2:TextView
               }
 
                 R.id.friendlist ->{
-                    textview1.setTextColor(ContextCompat.getColor(this,R.color.white))
+                    addActivity()
+                    true
+                 /*   textview1.setTextColor(ContextCompat.getColor(this,R.color.white))
                     textview2.setTextColor(ContextCompat.getColor(this,R.color.Aster_neo))
-                    textview3.setTextColor(ContextCompat.getColor(this,R.color.white))
-                    loadFragment(friendListFragment())
+                    textview3.setTextColor(ContextCompat.getColor(this,R.color.white))*/
+
                  //   fm.beginTransaction().hide(active).show(fragment2).commit()
                   //  active = fragment2
-                    true
+
                 }
 
                 R.id.notification ->{
@@ -156,11 +192,23 @@ lateinit var textview2:TextView
         }
     }
 
+    private fun addActivity() {
+    startActivity(Intent(applicationContext,ContactsyncActivity::class.java))
+
+
+
+    }
+
+
+
+
+    @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
+
         if (bottomNavigationView.selectedItemId != R.id.mich){
             bottomNavigationView.selectedItemId = R.id.mich
         } else{
-            finish()
+          finish()
         }
     }
 
@@ -221,6 +269,39 @@ lateinit var textview2:TextView
             .addSnapshotListener(listener)
         awaitClose { registration.remove() }
     }
+
+
+    private fun askNotificationPermission() {
+        // This is only necessary for API level >= 33 (TIRAMISU)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) ==
+                PackageManager.PERMISSION_GRANTED
+            ) {
+                // FCM SDK (and your app) can post notifications.
+            } else if (shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS)) {
+                // TODO: display an educational UI explaining to the user the features that will be enabled
+                //       by them granting the POST_NOTIFICATION permission. This UI should provide the user
+                //       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
+                //       If the user selects "No thanks," allow the user to continue without notifications.
+            } else {
+                // Directly ask for the permission
+                requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+    }
+
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            // FCM SDK (and your app) can post notifications.
+        } else {
+
+        }
+    }
+
+
 
 
 

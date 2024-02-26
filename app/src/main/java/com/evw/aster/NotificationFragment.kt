@@ -1,5 +1,6 @@
 package com.evw.aster
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ServerValue
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.awaitClose
@@ -23,6 +26,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.tasks.await
+
 
 
 class NotificationFragment : Fragment(),NotificationAdapter.CallbackInterface {
@@ -38,11 +42,15 @@ class NotificationFragment : Fragment(),NotificationAdapter.CallbackInterface {
     lateinit var fragmentviewdialog: fragmentviewdialog
     var username:String? = null
     var name:String? = null
+    var profilepic:String? = null
+    var senderroom:String? = null
     lateinit var internetConnectivity: InternetConnectivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -102,6 +110,7 @@ class NotificationFragment : Fragment(),NotificationAdapter.CallbackInterface {
 
             }
 
+
         }
 
        chip.setOnClickListener {
@@ -158,10 +167,15 @@ class NotificationFragment : Fragment(),NotificationAdapter.CallbackInterface {
 
     private suspend fun getUsername():DocumentSnapshot? {
         return try {
-
             val doc = FirebaseFirestore.getInstance().collection("Users").document(uid.toString()).get().await()
             val dbusername = doc.get("username")
+            val profilepics = doc.get("profilepic")
             username = dbusername.toString()
+            if (profilepics == null){
+                profilepic = "null"
+            } else {
+                profilepic = profilepics.toString()
+            }
             doc
         } catch (e:Exception){
             withContext(Dispatchers.Main){
@@ -240,6 +254,8 @@ class NotificationFragment : Fragment(),NotificationAdapter.CallbackInterface {
 
 
 
+
+
     }
 
     override fun chip2message(message: String) {
@@ -266,6 +282,15 @@ class NotificationFragment : Fragment(),NotificationAdapter.CallbackInterface {
 
 
     }
+
+    override fun imagviewmessage(name: String, uid: String, username: String) {
+        val intent: Intent = Intent(context,publicprofileactivity2::class.java)
+        intent.putExtra("username",username)
+        intent.putExtra("uid",uid)
+        intent.putExtra("name",name)
+        startActivity(intent)
+    }
+
 
     private suspend fun deleteRequest(message: String):Boolean {
      //   val uid = FirebaseAuth.getInstance().currentUser?.uid
@@ -322,11 +347,11 @@ class NotificationFragment : Fragment(),NotificationAdapter.CallbackInterface {
     private suspend fun firststep(vid: String, message2: String, message3: String): Boolean {
        // val uid = FirebaseAuth.getInstance().currentUser?.uid
         return try {
-
-            val data = hashMapOf("uid" to vid,"username" to message2,"name" to message3,"timestamp" to FieldValue.serverTimestamp(),"isblocked" to false)
+            val roomname = uid?.take(3) + vid.take(3)
+            val data = hashMapOf("uid" to vid,"username" to message2,"name" to message3,"timestamp" to FieldValue.serverTimestamp(),"isblocked" to false,"roomname" to roomname)
             val dbc = FirebaseFirestore.getInstance().collection("FriendsList").document(uid.toString()).collection("friends")
                 .document(vid).set(data).await()
-              Buildfriendsnow(vid,message2)
+              Buildfriendsnow(vid,message2,roomname)
 
             true
         } catch (e:Exception){
@@ -337,6 +362,8 @@ class NotificationFragment : Fragment(),NotificationAdapter.CallbackInterface {
             }
             false
         }
+
+
 
 
 
@@ -360,6 +387,21 @@ class NotificationFragment : Fragment(),NotificationAdapter.CallbackInterface {
                 Toast.makeText(context, "Nothinf found", Toast.LENGTH_SHORT).show()
             }
             null
+
+
+
+                          finallyAccept(vid)
+
+
+
+
+
+
+
+
+
+
+
         }*/
 
 
@@ -369,13 +411,16 @@ class NotificationFragment : Fragment(),NotificationAdapter.CallbackInterface {
 
 
 
-    private suspend fun Buildfriendsnow(vid: String, message2: String):Boolean {
+    private suspend fun Buildfriendsnow(vid: String, message2: String, roomname: String):Boolean {
      //   val uid = FirebaseAuth.getInstance().currentUser?.uid
         return try {
-            val data = hashMapOf("uid" to uid,"username" to username,"name" to name,"timestamp" to FieldValue.serverTimestamp(),"isblocked" to false)
+            val data = hashMapOf("uid" to uid,"username" to username,"name" to name,"timestamp" to FieldValue.serverTimestamp(),"isblocked" to false,"roomname" to roomname)
             val dbc = FirebaseFirestore.getInstance().collection("FriendsList").document(vid).collection("friends")
                 .document(uid.toString()).set(data).await()
-                 Addfriends(vid,message2)
+                 Checkfirstfriendship(vid)
+
+
+          //  Addfriends(vid,message2)
             true
         } catch (e:Exception){
             withContext(Dispatchers.Main){
@@ -385,101 +430,65 @@ class NotificationFragment : Fragment(),NotificationAdapter.CallbackInterface {
             }
             false
         }
-
-
-
     }
 
-    private suspend fun Addfriends(vid: String, message2: String):Boolean {
-     //   val uid = FirebaseAuth.getInstance().currentUser?.uid
+
+    private suspend fun Checkfirstfriendship(vid: String): DataSnapshot? {
         return try {
-            val firstkey = uid?.substring(0,4)
-              val secondkey = vid.substring(0,4)
-              val mainkey = firstkey + secondkey
-            val pushkey = FirebaseDatabase.getInstance().getReference("userRooms").child(uid.toString()).push().key
-            val map = hashMapOf("Uroomname" to mainkey,"Allmember" to true,"lastmessage" to "say hii","timestamp" to ServerValue.TIMESTAMP.toString(),"isblocked" to false,"username" to message2,"roomid" to pushkey)
-            val dbn = FirebaseDatabase.getInstance().getReference("userRooms").child(uid.toString()).child(pushkey.toString()).setValue(map).await()
-               secondAdd(vid,pushkey)
-            true
+            val sender = vid + uid
+            val doc = FirebaseDatabase.getInstance().getReference("Message").child(sender).get().await()
+            if(doc.exists()){
+               finallyAccept(vid)
+            } else {
+                val negativetime1 = -1699599203757
+                val negativetime2 = -1699600353986
+                val p1 = "Do not use abusive language during mich, we don't support any type of vulgarity in app, you can inform us if you faces any problem during mich , our customer support is 24 x 7"
+                val p2 = "Use emojis from chatbox to animate the avatar, Animated avatar can make  more real and fun chat between user, we are adding  more emojis in upcoming updates "
+                val p3 = "Do not use abusive language during mich, we don't support any type of vulgarity in app, you can inform us if you faces any problem during mich , our customer support is 24 x 7"
+                val p4 = "this side is used to spawn your partner avatar, and other side for your own avatar, you can inform us if you faces any problem during mich, more features are coming soon"
+                val vp = MessageClass(uid,p1,negativetime1)
+                val sp = MessageClass(uid,p2,negativetime2)
+                val tp = MessageClass(uid,p3,negativetime1)
+                val bp = MessageClass(uid,p4,negativetime2)
+                val sender1 = vid + uid
+                val reciver = uid + vid
+                FirebaseDatabase.getInstance().getReference("Message").child(sender1).push().setValue(vp).await()
+                FirebaseDatabase.getInstance().getReference("Message").child(sender1).push().setValue(sp).await()
+                FirebaseDatabase.getInstance().getReference("Message2").child(reciver).push().setValue(tp).await()
+                FirebaseDatabase.getInstance().getReference("Message2").child(reciver).push().setValue(bp).await()
+                FirebaseDatabase.getInstance().getReference("Message").child(reciver).push().setValue(vp).await()
+                FirebaseDatabase.getInstance().getReference("Message").child(reciver).push().setValue(sp).await()
+                FirebaseDatabase.getInstance().getReference("Message2").child(sender).push().setValue(tp).await()
+                FirebaseDatabase.getInstance().getReference("Message2").child(sender).push().setValue(bp).await()
+                finallyAccept(vid)
+            }
+            doc
         } catch (e:Exception){
             withContext(Dispatchers.Main){
-                fragmentprogressdialog.dismiss()
-                fragmentviewdialog.showDialog(context,"something went wrong Try again later","Check your network connection and then proceed")
-                Toast.makeText(context,"Failed to send", Toast.LENGTH_SHORT).show()
+
             }
-            false
-        }
-
-    }
-
-    private suspend fun secondAdd(vid: String, pushkey: String?):Boolean {
-     //   val uid = FirebaseAuth.getInstance().currentUser?.uid
-        return try {
-            val firstkey = uid?.substring(0,4)
-            val secondkey = vid.substring(0,4)
-            val mainkey = firstkey + secondkey
-            val map = hashMapOf("Uroomname" to mainkey,"Allmember" to true,"lastmessage" to "say hii","timestamp" to ServerValue.TIMESTAMP.toString(),"isblocked" to false,"username" to username,"roomid" to pushkey)
-            val db = FirebaseDatabase.getInstance().getReference("userRooms").child(vid).child(pushkey.toString()).setValue(map).await()
-            sentkeytofirestore(vid,pushkey)
-            true
-        } catch (e:Exception){
-            withContext(Dispatchers.Main){
-                fragmentprogressdialog.dismiss()
-                fragmentviewdialog.showDialog(context,"something went wrong Try again later","Check your network connection and then proceed")
-                Toast.makeText(context,"Failed to send", Toast.LENGTH_SHORT).show()
-            }
-            false
-        }
-
-
-    }
-
-    private suspend fun sentkeytofirestore(vid: String, pushkey: String?):Boolean {
-    //    val uid = FirebaseAuth.getInstance().currentUser?.uid
-        return try {
-            val data: HashMap<String, Any?> = hashMapOf("roomid" to pushkey,"Allmember" to true)
-            val dbc = FirebaseFirestore.getInstance().collection("FriendsList").document(uid.toString()).collection("friends").document(vid).update(data).await()
-              sentkeytofriend(vid,pushkey)
-            true
-        } catch (e:Exception){
-            withContext(Dispatchers.Main){
-                fragmentprogressdialog.dismiss()
-                fragmentviewdialog.showDialog(context,"something went wrong Try again later","Check your network connection and then proceed")
-                Toast.makeText(context,"Failed to send", Toast.LENGTH_SHORT).show()
-            }
-            false
-        }
-    }
-
-    private suspend fun sentkeytofriend(vid: String, pushkey: String?):Boolean {
-   //     val uid = FirebaseAuth.getInstance().currentUser?.uid
-        return try {
-            val data:HashMap<String, Any?> = hashMapOf("roomid" to pushkey,"Allmember" to true)
-            val dbc = FirebaseFirestore.getInstance().collection("FriendsList").document(vid).collection("friends").document(uid.toString()).update(data).await()
-              finallyAccept(vid)
-            true
-        } catch (e:Exception){
-            withContext(Dispatchers.Main){
-                fragmentprogressdialog.dismiss()
-                fragmentviewdialog.showDialog(context,"something went wrong Try again later","Check your network connection and then proceed")
-                Toast.makeText(context,"Failed to send", Toast.LENGTH_SHORT).show()
-            }
-            false
+            null
         }
 
 
 
     }
+
+
+
+
+
+
+
+
+
+
 
     private suspend fun finallyAccept(vid: String):Boolean {
       //  val uid = FirebaseAuth.getInstance().currentUser?.uid
         return try {
             val db = FirebaseFirestore.getInstance().collection("Notifications").document(uid.toString()).collection("notify").document(vid).update(mapOf("lptext" to "you","requestText" to "became friend with")).await()
-            withContext(Dispatchers.Main){
-                fragmentprogressdialog.dismiss()
-                activity?.supportFragmentManager?.beginTransaction()?.detach(this@NotificationFragment)?.commit()
-                activity?.supportFragmentManager?.beginTransaction()?.attach(this@NotificationFragment)?.commit()
-            }
+            sendNotificationstoother(vid)
             true
         } catch (e:Exception){
             withContext(Dispatchers.Main){
@@ -490,6 +499,32 @@ class NotificationFragment : Fragment(),NotificationAdapter.CallbackInterface {
             false
         }
     }
+
+    private suspend fun sendNotificationstoother(vid: String):Boolean {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        return try {
+            val data = hashMapOf("username" to username, "uid" to uid, "lptext" to "you","name" to name,"requestText"
+                        to "became friend with","timestamp" to FieldValue.serverTimestamp(),"isread" to "false","frid" to vid)
+                val db = FirebaseFirestore.getInstance().collection("Notifications").document(vid).collection("notify")
+                    .document(uid.toString()).set(data).await()
+            withContext(Dispatchers.Main){
+                fragmentprogressdialog.dismiss()
+                activity?.supportFragmentManager?.beginTransaction()?.detach(this@NotificationFragment)?.commit()
+                activity?.supportFragmentManager?.beginTransaction()?.attach(this@NotificationFragment)?.commit()
+            }
+
+            true
+
+        } catch (e:Exception){
+            withContext(Dispatchers.Main){
+                Toast.makeText(context,"Failed to send",Toast.LENGTH_SHORT).show()
+            }
+            false
+        }
+
+
+    }
+
 
 
     fun getNotification(): Flow<DocumentSnapshot> = callbackFlow {

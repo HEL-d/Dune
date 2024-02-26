@@ -232,3 +232,29 @@ class Allfun {}
     }
 }   */
 
+
+/*    fun setData(perList:MutableList<MichClass>){
+        this.usersList = perList.toMutableList()
+    }
+
+   fun addAll(newUsers: ArrayList<MichClass>) {
+       val initsize = usersList.size
+       usersList.addAll(newUsers)
+       notifyItemRangeChanged(initsize, newUsers.size)
+
+   }*/
+
+
+
+
+
+
+/*
+    fun setnewData(newData:ArrayList<MichClass>){
+        val difClass = DifClass(usersList,newData)
+        val diffresult = DiffUtil.calculateDiff(difClass)
+        usersList.clear()
+        usersList.addAll(newData)
+        diffresult.dispatchUpdatesTo(this)
+    }
+*/

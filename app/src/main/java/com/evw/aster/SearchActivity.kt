@@ -1,5 +1,6 @@
 package com.evw.aster
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.RelativeLayout
@@ -18,19 +19,19 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 
-class SearchActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity(),Goadapter.SearchInerface {
     lateinit var searchView: SearchView
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: Goadapter
     lateinit var relativeLayout: RelativeLayout
     lateinit var progressBar1: MaterialNeonProgressBar
     lateinit var progressBar2: MaterialNeonProgressBar
-    lateinit var userList: ArrayList<fat>
+    lateinit var userList: ArrayList<Searchavatarclass>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
         searchView = findViewById(R.id.searchViewnow)
-        adapter = Goadapter()
+        adapter = Goadapter(this)
         recyclerView = findViewById(R.id.first_recylerview)
         progressBar1 = findViewById(R.id.progressBar)
         progressBar2 = findViewById(R.id.progressBarLoadMore)
@@ -129,8 +130,8 @@ class SearchActivity : AppCompatActivity() {
     }
 
 
-    class FirestorePagingSource(private val db: FirebaseFirestore, private val newText:String) : PagingSource<QuerySnapshot, fat>() {
-        override suspend fun load(params: LoadParams<QuerySnapshot>): LoadResult<QuerySnapshot, fat> {
+    class FirestorePagingSource(private val db: FirebaseFirestore, private val newText:String) : PagingSource<QuerySnapshot, Searchavatarclass>() {
+        override suspend fun load(params: LoadParams<QuerySnapshot>): LoadResult<QuerySnapshot, Searchavatarclass> {
             return try {
                 val currentPage = params.key ?: db.collection("Usersname")
                     .whereGreaterThanOrEqualTo("username", newText)
@@ -143,7 +144,7 @@ class SearchActivity : AppCompatActivity() {
                     .await()
 
                 LoadResult.Page(
-                    data = currentPage.toObjects(fat::class.java),
+                    data = currentPage.toObjects(Searchavatarclass::class.java),
                     prevKey = null,
                     nextKey = nextPage
                 )
@@ -152,9 +153,20 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-        override fun getRefreshKey(state: PagingState<QuerySnapshot, fat>): QuerySnapshot? {
+        override fun getRefreshKey(state: PagingState<QuerySnapshot, Searchavatarclass>): QuerySnapshot? {
             return null
         }
+    }
+
+    override fun sendtonew(username: String, uid: String, profilepic: String, avatarurl: String) {
+        val intent: Intent = Intent(this@SearchActivity,publicprofileactivity::class.java)
+        intent.putExtra("username",username)
+        intent.putExtra("profilepic",profilepic)
+        intent.putExtra("uid",uid)
+        intent.putExtra("avatarurl",avatarurl)
+        startActivity(intent)
+
+
     }
 
 }

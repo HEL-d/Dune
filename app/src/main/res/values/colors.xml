@@ -16,4 +16,6 @@
     <color name="neon_duo">#40E0D0</color>
    <color name="neon_body">#00B8D4</color>
     <color name="neon_glow">#CC00B8B4</color>
+    <color name="ash">#0F0F0F</color>
+    <color name="palewhite">#fde7d6</color>
 </resources>

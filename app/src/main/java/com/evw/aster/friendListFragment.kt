@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -20,6 +21,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
@@ -47,8 +49,6 @@ class friendListFragment : Fragment(),FriendListAdapter.MInterface {
         super.onCreate(savedInstanceState)
 
     }
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -133,21 +133,14 @@ class friendListFragment : Fragment(),FriendListAdapter.MInterface {
         }
     }
 
-
-
-
-
-
-
-    override fun chip1message(uid: String, roomid: String) {
+    override fun chip1message(roomid: String) {
         context?.let {
             internetConnectivity.checkInternetConnection(object:InternetConnectivity.ConnectivityCallback{
                 override fun onDetected(isConnected: Boolean) {
                     if (isConnected){
                         fragmentprogressdialog.show()
-                       lifecycleScope.launch(Dispatchers.IO){
-                           deletefriend(uid,roomid)
-                       }
+                          deletefriend(roomid)
+
 
 
                     } else {
@@ -158,74 +151,129 @@ class friendListFragment : Fragment(),FriendListAdapter.MInterface {
 
             }, it)
         }
-
-
-
-
-
-
-
     }
 
-    private suspend fun deletefriend(vid: String, roomid: String):Boolean {
-        return try {
-            val db = FirebaseFirestore.getInstance().collection("FriendsList").document(uid.toString()).collection("friends")
-                .document(vid).delete().await()
-            deleteAllmember(vid,roomid)
-            true
-        } catch (e:Exception){
-            withContext(Dispatchers.Main){
-                fragmentprogressdialog.dismiss()
-                fragmentviewdialog.showDialog(context,"something went wrong Try again later","Check your network connection and then proceed")
-                Toast.makeText(context,"Failed to send", Toast.LENGTH_SHORT).show()
-            }
-            false
-        }
+    override fun gotosecondprofile(name: String, uid: String, username: String) {
+        val intent: Intent = Intent(context,publicprofileactivity2::class.java)
+        intent.putExtra("username",username)
+        intent.putExtra("uid",uid)
+        intent.putExtra("name",name)
+        startActivity(intent)
     }
 
-    private suspend fun deleteAllmember(vid: String, roomid: String):Boolean {
-        return try {
-            val db = FirebaseFirestore.getInstance().collection("FriendsList").document(vid).collection("friends").document(uid.toString()).delete().await()
-               checkforfrontchats(vid,roomid).collect{
-                   removefrontchtas(vid, roomid)
-               }
-
-
-
-
-            true
-        } catch (e:Exception){
-            withContext(Dispatchers.Main){
-                fragmentprogressdialog.dismiss()
-                fragmentviewdialog.showDialog(context,"something went wrong Try again later","Check your network connection and then proceed")
-                Toast.makeText(context,"Failed to send", Toast.LENGTH_SHORT).show()
-            }
-            false
-        }
-    }
-
-    private fun checkforfrontchats(vid: String, roomid: String):Flow<DataSnapshot> = callbackFlow {
-        val listener = object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    trySend(snapshot)
+    override fun blockhere(id: String, username: String, profilepic: String) {
+        val dialog :Dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.sheetdialog)
+        val block : TextView = dialog.findViewById(R.id.block)
+        val report: TextView = dialog.findViewById(R.id.report)
+        val gg = FirebaseFirestore.getInstance().collection("Blockaccounts").document(uid.toString()).collection("accounts").document(id.toString()).addSnapshotListener { value, error ->
+            if (value != null) {
+                if (value.exists()){
+                    block.setText("Unblock Account")
                 } else {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        setmembertofalse(vid, roomid).collect{
-                            finallyset(vid, roomid)
-                        }
-                    }
+                    block.setText("Block Account")
                 }
 
-            }
-            override fun onCancelled(error: DatabaseError) {
-                cancel()
-                return
+
             }
         }
-        val registration = FirebaseDatabase.getInstance().getReference("userRooms").child(uid.toString()).child(roomid)
-        registration.addValueEventListener(listener)
-        awaitClose { registration.removeEventListener(listener)}
+
+        block.setOnClickListener {
+            if (block.text == "Block Account") {
+                val map: HashMap<String, Any> = hashMapOf()
+                map.put("block",true)
+                val data = hashMapOf("block" to true, "timestamp" to FieldValue.serverTimestamp(), "profilepic" to profilepic.toString(),"Username" to username)
+                FirebaseFirestore.getInstance().collection("Blockaccounts").document(uid.toString())
+                    .collection("accounts").document(id.toString()).set(data)
+                    .addOnSuccessListener {
+                        Toast.makeText(context,"Blocked",Toast.LENGTH_LONG).show()
+                        dialog.dismiss()
+
+                    }
+            } else {
+                val map: HashMap<String, Any> = hashMapOf()
+                map.put("block",false)
+                FirebaseFirestore.getInstance().collection("Blockaccounts").document(uid.toString())
+                    .collection("accounts").document(id.toString()).delete().addOnSuccessListener {
+                        Toast.makeText(context,"Unblocked",Toast.LENGTH_LONG).show()
+                        dialog.dismiss()
+                    }
+            }
+
+
+
+        }
+
+        report.setOnClickListener {
+            val map: HashMap<String, Any> = hashMapOf()
+            map.put("account",id.toString())
+            FirebaseFirestore.getInstance().collection("ReportedAccount").document(uid.toString())
+                .collection("accounts").document(id.toString()).set(map).addOnSuccessListener {
+                    Toast.makeText(context,"Reported Suceesfully",Toast.LENGTH_LONG).show()
+                    dialog.dismiss()
+                }
+        }
+        dialog.show()
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+
+
+
+
+    }
+
+    private fun deletefriend(roomid: String) {
+        val db = FirebaseFirestore.getInstance().collection("FriendsList").document(uid.toString()).collection("friends")
+                .document(roomid).delete().addOnSuccessListener {
+                FirebaseFirestore.getInstance().collection("Notifications").document(uid.toString()).collection("notify")
+                    .document(roomid).get().addOnCompleteListener {
+                        if (it.result.exists()){
+                            FirebaseFirestore.getInstance().collection("Notifications").document(uid.toString()).collection("notify")
+                                .document(roomid).delete().addOnSuccessListener {
+                                    FirebaseFirestore.getInstance().collection("Notifications").document(roomid.toString()).collection("notify")
+                                        .document(uid.toString()).delete().addOnSuccessListener {
+                                            checkforfrontchats(roomid)
+                                        }
+                                }
+                        } else {
+                            checkforfrontchats(roomid)
+                        }
+
+
+
+
+                    }
+
+
+
+
+
+
+            }
+
+
+
+    }
+
+
+
+    private fun checkforfrontchats(roomid: String) {
+        val registration = FirebaseDatabase.getInstance().getReference("Usersrooms").child(uid.toString()).child(roomid).addListenerForSingleValueEvent(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    removefrontchtas(roomid)
+                }else {
+                    fragmentprogressdialog.dismiss()
+                    activity?.supportFragmentManager?.beginTransaction()?.detach(this@friendListFragment)?.commit()
+                    activity?.supportFragmentManager?.beginTransaction()?.attach(this@friendListFragment)?.commit()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
     }
 
 
@@ -272,22 +320,21 @@ class friendListFragment : Fragment(),FriendListAdapter.MInterface {
 
     }*/
 
-    private suspend fun removefrontchtas(vid: String, roomid: String):Boolean {
-        return try {
-            val dbc = FirebaseDatabase.getInstance().getReference("userRooms").child(uid.toString()).child(roomid)
-                .child("Allmember").setValue(false).await()
-               setmembertofalse(vid, roomid).collect{
-                   finallyset(vid, roomid)
-               }
-            true
-        } catch (e:Exception){
-            withContext(Dispatchers.Main){
-                fragmentprogressdialog.dismiss()
-                fragmentviewdialog.showDialog(context,"something went wrong Try again later","Check your network connection and then proceed")
-                Toast.makeText(context,"Failed to send", Toast.LENGTH_SHORT).show()
-            }
-            false
+    private  fun removefrontchtas(roomid: String){
+        val dbc = FirebaseDatabase.getInstance().getReference("Usersrooms").child(uid.toString()).child(roomid).removeValue().addOnSuccessListener {
+            fragmentprogressdialog.dismiss()
+            activity?.supportFragmentManager?.beginTransaction()?.detach(this@friendListFragment)?.commit()
+            activity?.supportFragmentManager?.beginTransaction()?.attach(this@friendListFragment)?.commit()
+        } .addOnFailureListener {
+            fragmentprogressdialog.dismiss()
+            fragmentviewdialog.showDialog(context,"something went wrong Try again later","Check your network connection and then proceed")
         }
+
+
+
+
+
+
 
     }
 
@@ -296,7 +343,7 @@ class friendListFragment : Fragment(),FriendListAdapter.MInterface {
 
 
 
-    private  fun setmembertofalse(vid: String, roomid: String):Flow<DataSnapshot> = callbackFlow {
+    private  fun setmembertofalse(roomid: String):Flow<DataSnapshot> = callbackFlow {
         val listener = object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
@@ -314,17 +361,23 @@ class friendListFragment : Fragment(),FriendListAdapter.MInterface {
             }
         }
 
-        val registration = FirebaseDatabase.getInstance().getReference("userRooms").child(vid).child(roomid)
+
+        val registration = FirebaseDatabase.getInstance().getReference("userRooms").child(roomid).child(uid.toString())
          registration.addValueEventListener(listener)
         awaitClose { registration.removeEventListener(listener)}
     }
 
 
 
-    private suspend fun finallyset(vid: String, roomid: String):Boolean {
+    private suspend fun finallyset(roomid: String):Boolean {
         return try {
-            val dbc = FirebaseDatabase.getInstance().getReference("userRooms").child(vid).child(roomid)
+            val dbc = FirebaseDatabase.getInstance().getReference("userRooms").child(roomid).child(uid.toString())
                     .child("Allmember").setValue(false).await()
+            val db = FirebaseDatabase.getInstance().getReference("userRooms").child(roomid).child(uid.toString())
+                .child("username").setValue("AsterAccount").await()
+            val dbd = FirebaseDatabase.getInstance().getReference("userRooms").child(uid.toString()).child(roomid)
+                .child("username").setValue("AsterAccount").await()
+
             withContext(Dispatchers.Main){
                 fragmentprogressdialog.dismiss()
                 activity?.supportFragmentManager?.beginTransaction()?.detach(this@friendListFragment)?.commit()

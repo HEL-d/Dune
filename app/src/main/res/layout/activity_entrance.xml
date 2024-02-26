@@ -14,9 +14,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Aster.gen2"
-        android:textSize="38sp"
-        app:fontFamily="@font/berkshire_swash"
+        android:text="Aster"
+        android:textSize="30sp"
+        app:fontFamily="@font/varino"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,13 +82,64 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Ahead of time"
-        android:textSize="15sp"
-        android:textStyle="bold"
+        android:layout_marginBottom="30dp"
+        android:text="have read"
+        app:flow_verticalBias="0.2"
+        android:textColor="#808080"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textVi" />
+
+    <TextView
+        android:id="@+id/textVi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="By tapping ''Create Account'' you acknowledge that you"
+        android:textColor="#808080"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/policy"
+        android:layout_marginBottom="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/policy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="30dp"
+        android:text="Privacy policy"
+
+        android:textColor="@color/Aster_neo"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="30dp"
+        android:text="and agree to"
+        android:textColor="#808080"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/policy" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="Term of service"
+        android:id="@+id/term"
+        android:layout_marginStart="3dp"
+        android:textSize="12sp"
+        android:textColor="@color/Aster_neo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView13" />
+
+
 
 
     <TextView
