@@ -32,6 +32,7 @@ import android.widget.PopupWindow
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.plusAssign
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -48,14 +49,13 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
-import com.unity3d.player.UnityPlayer
-import com.unity3d.player.UnityPlayerActivity
 
 
 
-class GameActivity:UnityPlayerActivity() {
 
-      companion object{
+class GameActivity:AppCompatActivity() {
+
+     /* companion object{
           private const val TAG = "GameActivity"
       }
 
@@ -96,11 +96,11 @@ class GameActivity:UnityPlayerActivity() {
     var flag:Boolean = true
     lateinit var linearLayout506: LinearLayout
     lateinit var textView506: TextView
-     var resumecount:Int = 0
+     var resumecount:Int = 0*/
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-        val rm = intent.getStringExtra("roomname")
+       /* val rm = intent.getStringExtra("roomname")
         val pm = intent.getStringExtra("url")
        val mich = intent.getStringExtra("mich")
         UnityPlayer.UnitySendMessage("CreateRoomMenu", "getroomname", rm)
@@ -135,10 +135,10 @@ class GameActivity:UnityPlayerActivity() {
             }
         }
 
+*/
 
 
-
-        FirebaseFirestore.getInstance().collection("Blockaccounts").document(reciveruid.toString()).collection("accounts").document(uid.toString()).get().addOnCompleteListener { firstsnap ->
+     /*   FirebaseFirestore.getInstance().collection("Blockaccounts").document(reciveruid.toString()).collection("accounts").document(uid.toString()).get().addOnCompleteListener { firstsnap ->
             if (firstsnap.result.exists()){
 
                  builder.setMessage("this action can't be performed")
@@ -161,10 +161,10 @@ class GameActivity:UnityPlayerActivity() {
 
         }
 
+*/
 
 
-
-        FirebaseFirestore.getInstance().collection("Users").document(reciveruid.toString()).get().addOnCompleteListener {
+       /* FirebaseFirestore.getInstance().collection("Users").document(reciveruid.toString()).get().addOnCompleteListener {
              val uri = it.result.get("avatarurl")
              if (uri != null){
                 val myurl = uri.toString()
@@ -174,9 +174,9 @@ class GameActivity:UnityPlayerActivity() {
 
 
          }
+*/
 
-
-        mUnityPlayer += Yeview(this).apply {
+       /* mUnityPlayer += Yeview(this).apply {
            layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT).apply {
                editText = findViewById<EditText>(R.id.edittextm)
                linearLayout506 = findViewById(R.id.gamepro)
@@ -243,7 +243,7 @@ class GameActivity:UnityPlayerActivity() {
                        getDatafromDatabase()
                        getDatareciverroom()
                        relativeLayout12.visibility = View.VISIBLE
-                   },5000)
+                   },5000)*/
                  /*  FirebaseFirestore.getInstance().collection("Triggers").document(uid.toString()).collection(reciveruid.toString()).addSnapshotListener(object:
                        EventListener<QuerySnapshot> {
                        override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
@@ -273,20 +273,20 @@ class GameActivity:UnityPlayerActivity() {
 
                    })*/
 
-                   Handler(Looper.getMainLooper()).postDelayed({
+                /*   Handler(Looper.getMainLooper()).postDelayed({
                        val city = hashMapOf("trigger" to FieldValue.serverTimestamp())
                        FirebaseFirestore.getInstance().collection("Triggers").document(reciveruid.toString()).collection(uid.toString()).document("data").set(city).addOnSuccessListener{
                            FirebaseFirestore.getInstance().collection("Triggers").document(uid.toString()).collection(reciveruid.toString()).document("data").set(city)
                        }
                    },1000)
 
-               }
+               }*/
 
 
 
 
 
-               FirebaseDatabase.getInstance().getReference("Usersrooms").child(uid.toString()).child(inkid.toString()).addValueEventListener(object:ValueEventListener{
+            /*   FirebaseDatabase.getInstance().getReference("Usersrooms").child(uid.toString()).child(inkid.toString()).addValueEventListener(object:ValueEventListener{
                    override fun onDataChange(snapshot: DataSnapshot) {
                        if (snapshot.exists()){
                            val typostatus = snapshot.child("typing").value.toString()
@@ -299,18 +299,18 @@ class GameActivity:UnityPlayerActivity() {
 
 
 
-                       }
+                       }*/
 
 
 
 
                    }
 
-                   override fun onCancelled(error: DatabaseError) {
+               /*    override fun onCancelled(error: DatabaseError) {
 
                    }
 
-               })
+               })*/
 
 
 
@@ -318,7 +318,7 @@ class GameActivity:UnityPlayerActivity() {
 
 
 
-               imageButton1.setOnClickListener {
+          /*     imageButton1.setOnClickListener {
                    if (editText.text.isNotEmpty()){
                        if(animy == "none"){
                             sendData(editText.text.toString(),reciveruid.toString(),"none")
@@ -343,9 +343,9 @@ class GameActivity:UnityPlayerActivity() {
                    }
 
                }
-
+*/
                
-            editText.addTextChangedListener(object:TextWatcher{
+          /*  editText.addTextChangedListener(object:TextWatcher{
                 override fun beforeTextChanged(
                     s: CharSequence?,
                     start: Int,
@@ -372,6 +372,7 @@ class GameActivity:UnityPlayerActivity() {
 
 
             })
+*/
 
 
 
@@ -384,8 +385,7 @@ class GameActivity:UnityPlayerActivity() {
 
 
 
-
-                relativeLayout2.setOnTouchListener(View.OnTouchListener({ v, event ->
+               /* relativeLayout2.setOnTouchListener(View.OnTouchListener({ v, event ->
                     fingerimage.clearAnimation()
                     fingerimage.visibility = View.GONE
                     button.visibility = View.VISIBLE
@@ -613,9 +613,9 @@ class GameActivity:UnityPlayerActivity() {
         }
         }
 
-    }
+    }*/
 
-    private fun checkTypingStatus(status: String?) {
+  /*  private fun checkTypingStatus(status: String?) {
         val tron : MutableMap<String, Any> = hashMapOf()
         tron.put("typing",status!!)
         FirebaseDatabase.getInstance().getReference("Usersrooms").child(inkid.toString()).child(uid.toString()).updateChildren(tron)
@@ -892,6 +892,6 @@ class GameActivity:UnityPlayerActivity() {
             })
 
 
-    }
+    }*/
 
 }

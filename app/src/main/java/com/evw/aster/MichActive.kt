@@ -17,16 +17,16 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.plusAssign
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.unity3d.player.UnityPlayer
-import com.unity3d.player.UnityPlayerActivity
 
 
-class MichActive:UnityPlayerActivity() {
 
-    lateinit var relativeLayout2: RelativeLayout
+class MichActive:AppCompatActivity() {
+
+  /*  lateinit var relativeLayout2: RelativeLayout
     lateinit var linerlayout: LinearLayout
     lateinit var button: RelativeLayout
     lateinit var constraintLayout: RelativeLayout
@@ -39,12 +39,14 @@ class MichActive:UnityPlayerActivity() {
     lateinit var img:ImageView
     lateinit var shine:ImageView
     lateinit var linearLayout506: LinearLayout
-    lateinit var textView506: TextView
+    lateinit var textView506: TextView*/
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val rm = intent.getStringExtra("ppc")
+
+    }
+      /*  val rm = intent.getStringExtra("ppc")
         val pm = intent.getStringExtra("url")
         UnityPlayer.UnitySendMessage("CreateRoomMenu", "getroomname", rm)
         UnityPlayer.UnitySendMessage("CreateRoomMenu", "getavatarurl", pm)
@@ -72,10 +74,10 @@ class MichActive:UnityPlayerActivity() {
                 },12000)
 
 
+*/
 
 
-
-                Handler(Looper.getMainLooper()).postDelayed({
+               /* Handler(Looper.getMainLooper()).postDelayed({
                        linearLayout506.visibility = View.GONE
                             relativeLayout2.visibility = View.VISIBLE
                             linerlayout.visibility = View.VISIBLE
@@ -98,6 +100,7 @@ class MichActive:UnityPlayerActivity() {
                         },15000)
 
 
+*/
 
 
 
@@ -114,8 +117,7 @@ class MichActive:UnityPlayerActivity() {
 
 
 
-
-
+/*
                 relativeLayout2.setOnTouchListener(View.OnTouchListener({ v, event ->
                     imageView.clearAnimation()
                     imageView.visibility = View.GONE
@@ -192,9 +194,9 @@ class MichActive:UnityPlayerActivity() {
                                         },500)
 
 
-                                       /* Handler(Looper.getMainLooper()).postDelayed({
+                                       *//* Handler(Looper.getMainLooper()).postDelayed({
                                             UnityPlayer.UnitySendMessage("backpoc", "QuitApp", "")
-                                        }, 500)*/
+                                        }, 500)*//*
                                     }
                             } else {
                                 relativeLayout2.visibility = View.GONE
@@ -234,7 +236,7 @@ class MichActive:UnityPlayerActivity() {
         animation.interpolator = AccelerateDecelerateInterpolator()
         animation.setRepeatCount(-1)
         shine.startAnimation(animation)
-    }
+    }*/
 
 }
 
