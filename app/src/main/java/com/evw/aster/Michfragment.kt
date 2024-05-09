@@ -16,12 +16,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.caverock.androidsvg.SVGImageView
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -63,6 +65,7 @@ class Michfragment : Fragment(),MichAdapternow.MichInterface {
     ): View {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_michfragment, container, false)
+
         list = arrayListOf()
         recyclerView = view.findViewById(R.id.recyclerView_mich)
         svgImageView = view.findViewById(R.id.SVGImageView6)
@@ -136,12 +139,14 @@ class Michfragment : Fragment(),MichAdapternow.MichInterface {
     override fun nextActivity(roomid: String, roomname:String) {
         if (myurl != "nul"){
                             if (michvalue != "null"){
+
                                 val intent:Intent = Intent(Intent(context,GameActivity::class.java))
                                 intent.putExtra("urlpart",urlpart)
                                 intent.putExtra("url",myurl)
                                 intent.putExtra("roomname",roomname)
                                 intent.putExtra("mich",michvalue)
                                 intent.putExtra("vid",roomid)
+                                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                                 startActivity(intent)
                             } else {
                                 val intent = Intent(Intent(context,GameActivity::class.java))
@@ -150,6 +155,7 @@ class Michfragment : Fragment(),MichAdapternow.MichInterface {
                                 intent.putExtra("roomname",roomname)
                                 intent.putExtra("mich","null")
                                 intent.putExtra("vid",roomid)
+                                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                                 startActivity(intent)
                             }
 

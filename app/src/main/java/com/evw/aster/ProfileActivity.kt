@@ -18,6 +18,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
@@ -53,6 +54,7 @@ class ProfileActivity : AppCompatActivity(),Avatarbuilderactivity.WebViewCallbac
     lateinit var detailstext:TextView
     var postername:String? = null
     private var urlConfig: UrlConfig = UrlConfig()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -63,15 +65,16 @@ class ProfileActivity : AppCompatActivity(),Avatarbuilderactivity.WebViewCallbac
         bioText = findViewById(R.id.bio_profile)
         detailstext = findViewById(R.id.details)
         usernametext = findViewById(R.id.username_profile)
-         nametext = findViewById(R.id.name_profile)
+        nametext = findViewById(R.id.name_profile)
         imageView = findViewById(R.id.profile_view)
         button = findViewById(R.id.no_button)
         progressBar = findViewById(R.id.profile_bar)
-        lifecycleScope.launch(Dispatchers.IO){
-            withContext(Dispatchers.Main){
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
                 progressBar.visibility = View.VISIBLE
             }
-            geturl().collect{
+            geturl().collect {
                 val ur = it.get("avatarurl")
                 val bio = it.get("bio")
                 url = ur.toString()
@@ -89,12 +92,12 @@ class ProfileActivity : AppCompatActivity(),Avatarbuilderactivity.WebViewCallbac
                         postername = ""
                     } else {
                         postername = "file:///android_asset/poster.svg"
-                        user = url!!.replace(".glb",".glb?quality=medium")
+                        user = url!!.replace(".glb", ".glb?quality=medium")
                     }
 
-                    if (bio == null){
+                    if (bio == null) {
                         bioText.text = "Add a bio"
-                    } else if(bio == ""){
+                    } else if (bio == "") {
                         bioText.text = "Add a bio"
                     } else {
                         bioText.text = bio.toString()
@@ -102,7 +105,8 @@ class ProfileActivity : AppCompatActivity(),Avatarbuilderactivity.WebViewCallbac
                     if (imagesrc == null) {
                         imageView.setImageResource(R.drawable.blankprofile)
                     } else {
-                        Picasso.get().load(imagesrc.toString()).placeholder(R.drawable.blankprofile).into(imageView)
+                        Picasso.get().load(imagesrc.toString()).placeholder(R.drawable.blankprofile)
+                            .into(imageView)
                     }
                     usernametext.text = username.toString()
                     nametext.text = name.toString()
@@ -115,42 +119,43 @@ class ProfileActivity : AppCompatActivity(),Avatarbuilderactivity.WebViewCallbac
             loadWithOverviewMode = true
         }
         webView.loadUrl("file:///android_asset/Modelview.html")
-        webView.webViewClient = object: WebViewClient(){
+        webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                webView.evaluateJavascript("javascript: " +"updateFrompos(\"" + postername + "\")",null)
-                webView.evaluateJavascript("javascript: " +"updateFromNative(\"" + user + "\")",null)
+                webView.evaluateJavascript(
+                    "javascript: " + "updateFrompos(\"" + postername + "\")",
+                    null
+                )
+                webView.evaluateJavascript(
+                    "javascript: " + "updateFromNative(\"" + user + "\")",
+                    null
+                )
                 progressBar.visibility = View.GONE
             }
         }
         relativeLayout1.setOnClickListener {
-            startActivity(Intent(this,SettingActivity::class.java))
+            startActivity(Intent(this, SettingActivity::class.java))
         }
         relativeLayout2.setOnClickListener {
-           val profileeditnow = profileeditnow()
-            profileeditnow.givedilaog(this,username,phoneNumber)
+            val profileeditnow = profileeditnow()
+            profileeditnow.givedilaog(this, username, phoneNumber)
         }
         detailstext.setOnClickListener {
-        supportFragmentManager.beginTransaction().replace(R.id.containerhere,friendListFragment()).addToBackStack(null).commit()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.containerhere, friendListFragment()).addToBackStack(null).commit()
         }
+
         bioText.setOnClickListener {
-            startActivity(Intent(this,EditActivity::class.java))
+            startActivity(Intent(this, EditActivity::class.java))
         }
 
 
         button.setOnClickListener {
-            val intent = Intent(this, Avatarbuilderactivity::class.java)
-            intent.putExtra(Avatarbuilderactivity.CLEAR_BROWSER_CACHE, true)
-            intent.putExtra(Avatarbuilderactivity.CLEAR_BROWSER_CACHE,true)
-            intent.putExtra(Avatarbuilderactivity.URL_KEY, UrlBuilder(urlConfig).buildUrl())
-           val  Avatarbuilderresultlauncher  = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    Log.d("RPM", "Result activity run.")
-                }
-            }
-            Avatarbuilderresultlauncher.launch(intent)
-
-
+            val intent: Intent = Intent(this,avatargen::class.java)
+            intent.putExtra("avatarbool","false")
+            intent.putExtra("username",username)
+            intent.putExtra("phonenumber",phoneNumber)
+            startActivity(intent)
         }
 
 
@@ -159,6 +164,16 @@ class ProfileActivity : AppCompatActivity(),Avatarbuilderactivity.WebViewCallbac
 
 
     }
+
+   val Avatarbuilderresultlauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                Log.d("RPM", "Result activity run.")
+            }
+        }
+
+
+
 
 
     override fun onAvatarExported(avatarUrl: String) {
@@ -189,6 +204,15 @@ class ProfileActivity : AppCompatActivity(),Avatarbuilderactivity.WebViewCallbac
     override fun onUserLogout() {
 
     }
+
+
+
+
+
+
+
+
+
 
     private fun showAlert(url: String){
         val context = this@ProfileActivity
@@ -231,6 +255,10 @@ class ProfileActivity : AppCompatActivity(),Avatarbuilderactivity.WebViewCallbac
         val registration = FirebaseFirestore.getInstance().collection("Users").document(uid.toString()).addSnapshotListener(listener)
         awaitClose { registration.remove() }
     }
+
+
+
+
 
 
 

@@ -15,7 +15,7 @@ android {
         applicationId "com.evw.aster"
         minSdk 24
         targetSdk 34
-        versionCode 1
+        versionCode 3
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -37,8 +37,7 @@ android {
 
 }
 dependencies {
-    implementation project(':unityLibrary')
-    implementation fileTree(dir: project(':unityLibrary').getProjectDir().toString() + ('\\libs'), include: ['*.jar'])
+
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
    implementation  'com.google.android.material:material:1.11.0'
@@ -48,8 +47,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
     implementation 'com.github.SMehranB:GlowNeonButton:2.0.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.google.firebase:firebase-database-ktx:20.3.0'
-    implementation 'com.google.firebase:firebase-firestore:24.10.2'
+    implementation 'com.google.firebase:firebase-database-ktx:20.3.1'
+    implementation 'com.google.firebase:firebase-firestore:24.10.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3'
@@ -57,7 +56,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:22.3.1'
     implementation 'com.firebaseui:firebase-ui-database:8.0.2'
     implementation 'com.google.firebase:firebase-storage-ktx:20.3.0'
-    implementation 'androidx.browser:browser:1.7.0'
+    implementation 'androidx.browser:browser:1.8.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.google.firebase:firebase-appcheck-playintegrity:17.1.2'
     implementation "androidx.core:core-splashscreen:1.0.1"

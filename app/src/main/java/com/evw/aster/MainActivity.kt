@@ -208,7 +208,7 @@ lateinit var textview2:TextView
         if (bottomNavigationView.selectedItemId != R.id.mich){
             bottomNavigationView.selectedItemId = R.id.mich
         } else{
-          finish()
+          finishAffinity()
         }
     }
 

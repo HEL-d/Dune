@@ -15,6 +15,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.plusAssign
 import com.google.firebase.auth.FirebaseAuth
@@ -37,6 +38,8 @@ class MichActive:UnityPlayerActivity() {
     var count: Int = 0
     lateinit var img:ImageView
     lateinit var shine:ImageView
+    lateinit var linearLayout506: LinearLayout
+    lateinit var textView506: TextView
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,20 +55,33 @@ class MichActive:UnityPlayerActivity() {
             ).apply {
                 constraintLayout = findViewById(R.id.rootview)
                 relativeLayout2 = findViewById(R.id.button28)
+                linearLayout506 = findViewById(R.id.gamepro)
+                textView506 = findViewById(R.id.trip)
                 button = findViewById(R.id.savebutton)
                 linerlayout = findViewById(R.id.ncc)
                 imageView = findViewById(R.id.fringer)
                 img = findViewById(R.id.img)
                 shine = findViewById(R.id.shine)
-                constraintLayout.setOnTouchListener(View.OnTouchListener { v, event ->
-                    count++
-                    if (count == 2) {
-                        Handler(Looper.getMainLooper()).postDelayed({
+                Handler(Looper.getMainLooper()).postDelayed({
+                    linearLayout506.visibility = View.VISIBLE
+                    textView506.setText("Preparing game for you")
+                },5000)
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    textView506.setText("Almost prepared")
+                },12000)
+
+
+
+
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                       linearLayout506.visibility = View.GONE
                             relativeLayout2.visibility = View.VISIBLE
                             linerlayout.visibility = View.VISIBLE
                             UnityPlayer.UnitySendMessage("Road","activatenow","")
                             UnityPlayer.UnitySendMessage("mask","maskme","")
-                                                                    }, 4000)
+                                                                    }, 15000)
                         Handler(Looper.getMainLooper()).postDelayed({
                             imageView.visibility = View.VISIBLE
                             val   mAnimation = TranslateAnimation(
@@ -79,13 +95,7 @@ class MichActive:UnityPlayerActivity() {
                             mAnimation.setRepeatMode(Animation.RESTART)
                             mAnimation.setInterpolator(LinearInterpolator())
                             imageView.setAnimation(mAnimation)
-                        },4000)
-
-
-
-
-
-                    }
+                        },15000)
 
 
 
@@ -96,8 +106,13 @@ class MichActive:UnityPlayerActivity() {
 
 
 
-                    false
-                })
+
+
+
+
+
+
+
 
 
 
@@ -173,8 +188,13 @@ class MichActive:UnityPlayerActivity() {
                                             ""
                                         )
                                         Handler(Looper.getMainLooper()).postDelayed({
+                                            mUnityPlayer.destroy()
+                                        },500)
+
+
+                                       /* Handler(Looper.getMainLooper()).postDelayed({
                                             UnityPlayer.UnitySendMessage("backpoc", "QuitApp", "")
-                                        }, 500)
+                                        }, 500)*/
                                     }
                             } else {
                                 relativeLayout2.visibility = View.GONE

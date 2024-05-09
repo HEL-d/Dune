@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Collectionsplash">
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/Aster_neo"
+        android:textColor="@color/black"
+        android:text="Create new collection"
+        android:id="@+id/create_collect"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/precollection_recyler"
+            android:layout_height="match_parent"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        android:background="@color/ash"
+        android:id="@+id/temper"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <EditText
+            android:id="@+id/treep"
+            android:layout_width="match_parent"
+            android:hint="Enter collection name"
+            android:paddingStart="10dp"
+            android:textColorHint="#808080"
+
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:text="Add item"
+            android:id="@+id/create"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:backgroundTint="@color/Aster_neo"
+             android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
