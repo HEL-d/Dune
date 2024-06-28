@@ -8,7 +8,8 @@ pluginManagement {
 
 rootProject.name = "Aster.gen2"
 include ':app'
-
+include ':unityLibrary'
+project(':unityLibrary').projectDir=new File('C:\\Users\\sonu computer\\apg\\unityLibrary')
 
 
 dependencyResolutionManagement {
@@ -17,7 +18,9 @@ dependencyResolutionManagement {
         google()
         maven { url 'https://jitpack.io' }
         mavenCentral()
-
+        flatDir {
+            dirs "${project(':unityLibrary').projectDir}/libs"
+        }
     }
 }
 
