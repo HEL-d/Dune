@@ -49,65 +49,63 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
+import com.unity3d.player.UnityPlayer
+import com.unity3d.player.UnityPlayerActivity
 
 
+class GameActivity:UnityPlayerActivity(){
 
-
-class GameActivity:AppCompatActivity() {
-
-     /* companion object{
+      companion object{
           private const val TAG = "GameActivity"
       }
 
-    
-
-    lateinit var relativeLayout2: RelativeLayout
-    lateinit var button: RelativeLayout
-    lateinit var linerlayout: LinearLayout
-    var xdown = 0f
-    var ydown:Float = 0f
-    var givemedistance:Int = 0
+  //  lateinit var relativeLayout2: RelativeLayout
+  // lateinit var button: RelativeLayout
+  //  lateinit var linerlayout: LinearLayout
+ //   var xdown = 0f
+ //   var ydown:Float = 0f
+ //   var givemedistance:Int = 0
     val uid = FirebaseAuth.getInstance().currentUser?.uid
     var reciverRoom:String? = null
     var senderRoom:String? = null
-    lateinit var mlist:ArrayList<MessageClass>
+  //  lateinit var mlist:ArrayList<MessageClass>
     lateinit var ulist:ArrayList<MessageClass>
-    lateinit var uplist:ArrayList<MessageClass>
+  //  lateinit var uplist:ArrayList<MessageClass>
     lateinit var chatAdapter: ChatAdapter
     lateinit var recyclerView: RecyclerView
-    lateinit var recylerview2: RecyclerView
+   // lateinit var recylerview2: RecyclerView
     lateinit var editText: EditText
     lateinit var imageButton1: ImageButton
     lateinit var imageButton2: ImageButton
-    lateinit var BAdapter:BAdapter
-    var valuenow:String? = null
-    lateinit var popupWindow: PopupWindow
-    var animy:String = "none"
+ //   lateinit var BAdapter:BAdapter
+//    var valuenow:String? = null
+//    lateinit var popupWindow: PopupWindow
+ //   var animy:String = "none"
     var type:Int = 0
     var active = false
     var inkid:String? = null
     var urlpart:String? = null
-    lateinit var relativeLayout12: RelativeLayout
-    var ctimer : CountDownTimer? = null
-    lateinit var img: ImageView
-    lateinit var shine: ImageView
-    lateinit var fingerimage:ImageView
+ //   lateinit var relativeLayout12: RelativeLayout
+ //   var ctimer : CountDownTimer? = null
+  //  lateinit var img: ImageView
+  //  lateinit var shine: ImageView
+ //   lateinit var fingerimage:ImageView
     var reciverUrl:String = ""
     var flag:Boolean = true
-    lateinit var linearLayout506: LinearLayout
-    lateinit var textView506: TextView
-     var resumecount:Int = 0*/
+  //  lateinit var linearLayout506: LinearLayout
+  //  lateinit var textView506: TextView
+     var resumecount:Int = 0
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-       /* val rm = intent.getStringExtra("roomname")
+        val rm = intent.getStringExtra("roomname")
         val pm = intent.getStringExtra("url")
        val mich = intent.getStringExtra("mich")
         UnityPlayer.UnitySendMessage("CreateRoomMenu", "getroomname", rm)
         UnityPlayer.UnitySendMessage("CreateRoomMenu", "getavatarurl", pm)
       ulist = arrayListOf()
-        mlist = arrayListOf()
-        uplist = arrayListOf()
+      //  mlist = arrayListOf()
+      //  uplist = arrayListOf()
         val reciveruid = intent.getStringExtra("vid")
         inkid = reciveruid
         senderRoom = reciveruid + uid
@@ -122,7 +120,7 @@ class GameActivity:AppCompatActivity() {
                     mUnityPlayer.destroy()
                 },500)
             })
-        ctimer = object : CountDownTimer(8000, 1000) {
+     /*   ctimer = object : CountDownTimer(8000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
 
                 // logic to set the EditText could go here
@@ -133,9 +131,9 @@ class GameActivity:AppCompatActivity() {
                 UnityPlayer.UnitySendMessage(urlpart,valuenow,"false")
 
             }
-        }
+        }*/
 
-*/
+
 
 
      /*   FirebaseFirestore.getInstance().collection("Blockaccounts").document(reciveruid.toString()).collection("accounts").document(uid.toString()).get().addOnCompleteListener { firstsnap ->
@@ -164,7 +162,7 @@ class GameActivity:AppCompatActivity() {
 */
 
 
-       /* FirebaseFirestore.getInstance().collection("Users").document(reciveruid.toString()).get().addOnCompleteListener {
+        FirebaseFirestore.getInstance().collection("Users").document(reciveruid.toString()).get().addOnCompleteListener {
              val uri = it.result.get("avatarurl")
              if (uri != null){
                 val myurl = uri.toString()
@@ -174,35 +172,39 @@ class GameActivity:AppCompatActivity() {
 
 
          }
-*/
 
-       /* mUnityPlayer += Yeview(this).apply {
+
+        mUnityPlayer += Yeview(this).apply {
            layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT).apply {
-               editText = findViewById<EditText>(R.id.edittextm)
-               linearLayout506 = findViewById(R.id.gamepro)
-               textView506 = findViewById(R.id.trip)
-               imageButton1 = findViewById(R.id.sendbutton)
-                imageButton2 = findViewById(R.id.emo)
-               img = findViewById(R.id.img)
-               shine = findViewById(R.id.shine)
-               fingerimage = findViewById(R.id.fringer)
-                relativeLayout12 = findViewById(R.id.mainrelative)
-               relativeLayout2 = findViewById(R.id.button28)
-               button = findViewById(R.id.savebutton)
-                linerlayout = findViewById(R.id.ncc)
-               recyclerView = findViewById<RecyclerView>(R.id.Err)
-               recylerview2 = findViewById<RecyclerView>(R.id.prr)
-                val lm : LinearLayoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,true)
-                lm.stackFromEnd = true
-                recylerview2.layoutManager = lm
-                val opm :LinearLayoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,true)
+               editText = findViewById<EditText>(R.id.wrting)
+            //   linearLayout506 = findViewById(R.id.gamepro)
+             //  textView506 = findViewById(R.id.trip)
+               imageButton1 = findViewById(R.id.imageView3)
+                imageButton2 = findViewById(R.id.send_msg)
+             //  img = findViewById(R.id.img)
+            //   shine = findViewById(R.id.shine)
+            //   fingerimage = findViewById(R.id.fringer)
+            //    relativeLayout12 = findViewById(R.id.mainrelative)
+             //  relativeLayout2 = findViewById(R.id.button28)
+            //   button = findViewById(R.id.savebutton)
+              //  linerlayout = findViewById(R.id.ncc)
+               recyclerView = findViewById<RecyclerView>(R.id.two_recyler)
+               val opm :LinearLayoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,true)
                opm.stackFromEnd = true
-                recyclerView.layoutManager = opm
+               recyclerView.layoutManager = opm
                chatAdapter = ChatAdapter(context)
-                BAdapter = BAdapter(context)
-                recyclerView.adapter = BAdapter
-               recylerview2.adapter = chatAdapter
-               if (mich == "null") {
+               recyclerView.adapter = chatAdapter
+               getDatafromDatabase()
+             //  recylerview2 = findViewById<RecyclerView>(R.id.prr)
+             //   val lm : LinearLayoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,true)
+              //  lm.stackFromEnd = true
+               // recylerview2.layoutManager = lm
+
+              //  BAdapter = BAdapter(context)
+              //  recyclerView.adapter = BAdapter
+
+
+              /* if (mich == "null") {
                    Handler(Looper.getMainLooper()).postDelayed({
                        linearLayout506.visibility = View.VISIBLE
                         textView506.setText("Preparing game for you")
@@ -244,7 +246,10 @@ class GameActivity:AppCompatActivity() {
                        getDatareciverroom()
                        relativeLayout12.visibility = View.VISIBLE
                    },5000)*/
-                 /*  FirebaseFirestore.getInstance().collection("Triggers").document(uid.toString()).collection(reciveruid.toString()).addSnapshotListener(object:
+
+
+
+                  FirebaseFirestore.getInstance().collection("Triggers").document(uid.toString()).collection(reciveruid.toString()).addSnapshotListener(object:
                        EventListener<QuerySnapshot> {
                        override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                            if (value != null){
@@ -271,16 +276,16 @@ class GameActivity:AppCompatActivity() {
                            }
                        }
 
-                   })*/
+                   })
 
-                /*   Handler(Looper.getMainLooper()).postDelayed({
+                 Handler(Looper.getMainLooper()).postDelayed({
                        val city = hashMapOf("trigger" to FieldValue.serverTimestamp())
                        FirebaseFirestore.getInstance().collection("Triggers").document(reciveruid.toString()).collection(uid.toString()).document("data").set(city).addOnSuccessListener{
                            FirebaseFirestore.getInstance().collection("Triggers").document(uid.toString()).collection(reciveruid.toString()).document("data").set(city)
                        }
                    },1000)
 
-               }*/
+               }
 
 
 
@@ -318,8 +323,25 @@ class GameActivity:AppCompatActivity() {
 
 
 
-          /*     imageButton1.setOnClickListener {
-                   if (editText.text.isNotEmpty()){
+              imageButton1.setOnClickListener {
+                  UnityPlayer.UnitySendMessage("RoomActionCanvas","OnClick_Leave","")
+                  Handler(Looper.getMainLooper()).postDelayed({
+                      val intent = Intent(this@GameActivity, MainActivity::class.java)
+                      intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                      startActivity(intent)
+
+
+
+
+                  },500)
+
+
+
+
+
+
+
+                /*   if (editText.text.isNotEmpty()){
                        if(animy == "none"){
                             sendData(editText.text.toString(),reciveruid.toString(),"none")
                         } else if (animy == "smile") {
@@ -340,10 +362,23 @@ class GameActivity:AppCompatActivity() {
 
                                                                    },500)
 
-                   }
+                   }*/
 
                }
-*/
+
+
+        imageButton2.setOnClickListener{
+            if (editText.text.isNotEmpty()){
+                UnityPlayer.UnitySendMessage("Code","doReply",editText.text.toString())
+                sendData(editText.text.toString(),reciveruid.toString())
+            }
+
+        }
+
+
+
+
+
                
           /*  editText.addTextChangedListener(object:TextWatcher{
                 override fun beforeTextChanged(
@@ -385,7 +420,7 @@ class GameActivity:AppCompatActivity() {
 
 
 
-               /* relativeLayout2.setOnTouchListener(View.OnTouchListener({ v, event ->
+      /*          relativeLayout2.setOnTouchListener(View.OnTouchListener({ v, event ->
                     fingerimage.clearAnimation()
                     fingerimage.visibility = View.GONE
                     button.visibility = View.VISIBLE
@@ -421,9 +456,9 @@ class GameActivity:AppCompatActivity() {
 
 
                     true
-                }))
+                }))*/
 
-                button.setOnClickListener {
+               /* button.setOnClickListener {
                     FirebaseFirestore.getInstance().collection("Users").document(uid.toString()).update("michHeight",givemedistance.toString()).addOnSuccessListener {
                         Toast.makeText(context,"Successfully Updated", Toast.LENGTH_LONG).show()
                            relativeLayout2.visibility = View.GONE
@@ -472,23 +507,23 @@ class GameActivity:AppCompatActivity() {
                     }
 
 
-              }
+              }*/
 
 
 
-               imageButton2.setOnClickListener {
+             /*  imageButton2.setOnClickListener {
                     popupWindow.showAtLocation(editText,
                         Gravity.BOTTOM or Gravity.END,
                         0  ,
                         0
                    )
-                }
+                }*/
 
 
 
 
 
-                popupWindow =    PopupWindow(editText.context).apply {
+               /* popupWindow =    PopupWindow(editText.context).apply {
                    isOutsideTouchable = true
                     val inflater = LayoutInflater.from(editText.context)
                     contentView = inflater.inflate(R.layout.emojiview, null).apply {
@@ -609,18 +644,18 @@ class GameActivity:AppCompatActivity() {
 
                     //    val size = Size(popupWindow.contentView.measuredWidth, popupWindow.contentView.measuredHeight)
                     popupWindow.setBackgroundDrawable(ColorDrawable(Color.BLACK))
-             }
-        }
+             }*/
+
         }
 
-    }*/
 
-  /*  private fun checkTypingStatus(status: String?) {
+
+ /*  private fun checkTypingStatus(status: String?) {
         val tron : MutableMap<String, Any> = hashMapOf()
         tron.put("typing",status!!)
         FirebaseDatabase.getInstance().getReference("Usersrooms").child(inkid.toString()).child(uid.toString()).updateChildren(tron)
 
-    }
+    }*/
 
 
 
@@ -712,7 +747,7 @@ class GameActivity:AppCompatActivity() {
         })
     }
 
-    private fun sendData(p: String, reciveruid: String, aniv: String) {
+    private fun sendData(p: String, reciveruid: String) {
         val bp =  FirebaseDatabase.getInstance().getReference("Timestamp").child(uid.toString())
         val postValues: MutableMap<String, Any> = hashMapOf()
         postValues.put("timestamp", ServerValue.TIMESTAMP)
@@ -730,7 +765,7 @@ class GameActivity:AppCompatActivity() {
                         FirebaseDatabase.getInstance().getReference("Message2").child(senderRoom.toString()).push().setValue(vp).addOnSuccessListener {
                             FirebaseDatabase.getInstance().getReference("Usersrooms").child(reciveruid.toString()).child(uid.toString()).updateChildren(pj)
                             FirebaseDatabase.getInstance().getReference("Usersrooms").child(uid.toString()).child(reciveruid.toString()).updateChildren(pj)
-                            animy = "none"
+                           /* animy = "none"
                             if (aniv == "smile"){
                               //  prolaughingAnimation()
                             } else if (aniv == "sad"){
@@ -766,9 +801,9 @@ class GameActivity:AppCompatActivity() {
                             } else if (aniv == "victory"){
                              //   proVictoryAnimation()
                             } else if (aniv == "none"){
-                               proTalkAnimation()
+                            //   proTalkAnimation()
                            } else if(aniv == "talk"){
-                               proTalkAnimation()
+                            //   proTalkAnimation()
                             } else if(aniv == "blush"){
                               //  proBlushanimation()
                             } else if (aniv == "nointer"){
@@ -783,7 +818,7 @@ class GameActivity:AppCompatActivity() {
                              //   proCringeanimation()
                             } else if (aniv == "proud"){
                               //  proProudanimation()
-                            }
+                            }*/
 
                         }
 
@@ -802,7 +837,7 @@ class GameActivity:AppCompatActivity() {
 
 
 
-    private fun proTalkAnimation() {
+  /*  private fun proTalkAnimation() {
         if (valuenow != null){
             if (valuenow != "getTalkingAnimation"){
                 UnityPlayer.UnitySendMessage(urlpart,valuenow,"false")
@@ -825,9 +860,9 @@ class GameActivity:AppCompatActivity() {
 
 
 
-    }
+    }*/
 
-    private fun ShineAnimation() {
+  /*  private fun ShineAnimation() {
         val animation: Animation = TranslateAnimation(0f,
             (img.getWidth() + shine.getWidth()).toFloat(), 0f, 0f)
         animation.duration = 550
@@ -835,7 +870,7 @@ class GameActivity:AppCompatActivity() {
         animation.interpolator = AccelerateDecelerateInterpolator()
         animation.setRepeatCount(-1)
         shine.startAnimation(animation)
-    }
+    }*/
 
 
 
@@ -843,7 +878,7 @@ class GameActivity:AppCompatActivity() {
 
 
 
-    private fun getDatareciverroom() {
+  /*  private fun getDatareciverroom() {
         FirebaseDatabase.getInstance().getReference("Message2").child(reciverRoom.toString()).orderByChild("timestamp")
             .limitToFirst(15).addValueEventListener(object:ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -865,7 +900,7 @@ class GameActivity:AppCompatActivity() {
 
            })
 
-    }
+    }*/
 
     private fun getDatafromDatabase() {
        FirebaseDatabase.getInstance().getReference("Message").child(senderRoom.toString())
@@ -881,7 +916,7 @@ class GameActivity:AppCompatActivity() {
                         //    key = ulist[ulist.size - 1].timestamp
                    }
                     chatAdapter.addlisttop(ulist)
-                    recylerview2.adapter?.let { recylerview2.smoothScrollToPosition(0) }
+                    recyclerView.adapter?.let { recyclerView.smoothScrollToPosition(0) }
                     chatAdapter.notifyDataSetChanged()
                 }
 
@@ -892,6 +927,6 @@ class GameActivity:AppCompatActivity() {
             })
 
 
-    }*/
+    }
 
 }

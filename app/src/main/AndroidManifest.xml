@@ -150,12 +150,12 @@
 
         <activity android:name=".MichActive"
             android:theme="@style/Theme.Material3.DayNight.NoActionBar"
-           android:windowSoftInputMode="adjustPan"
+           android:windowSoftInputMode="adjustResize"
             android:exported="true"/>
 
           <activity android:name=".GameActivity"
               android:theme="@style/Theme.Material3.DayNight.NoActionBar"
-              android:windowSoftInputMode="adjustPan"
+              android:windowSoftInputMode="adjustResize"
               android:exported="true"/>
 
         <activity
